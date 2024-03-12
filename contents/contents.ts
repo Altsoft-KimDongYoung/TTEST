@@ -1,5 +1,7 @@
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
+export type ContentsType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
+
 export type CreatorType =
   | 'LOCALBOX_MEMBER'
   | 'LOCALBOX_BUSINESS'
@@ -8,7 +10,7 @@ export type CreatorType =
   | 'LOCALBOX_LOCAL_NEWSPAPER';
 
 // 콘텐츠 목록 관련 객체 type 정의
-export interface ownerLocalboxDtoType {
+export interface OwnerLocalboxDtoType {
   localboxId: number;
   localboxCreatorType: CreatorType;
   localboxName: string;
@@ -20,7 +22,7 @@ export interface ownerLocalboxDtoType {
   subscribeYn: boolean;
 }
 
-export interface contentsFileDtosType {
+export interface ContentsFileDtosType {
   id: number;
   contentsId: number;
   fileType: string | null;
@@ -30,7 +32,7 @@ export interface contentsFileDtosType {
   represent: boolean;
 }
 
-export interface contentsHashTagDtosType {
+export interface ContentsHashTagDtosType {
   id: number;
   contentsId: number;
   hashTagId: number;
@@ -38,7 +40,7 @@ export interface contentsHashTagDtosType {
   orderNum: number;
 }
 
-export interface lrateDtosType {
+export interface LrateDtosType {
   id: number;
   contentsId: number;
   areaName: string;
@@ -46,7 +48,7 @@ export interface lrateDtosType {
   rate: number;
 }
 
-export interface writerLocalboxDtoType {
+export interface WriterLocalboxDtoType {
   localboxId: number;
   localboxCreatorType: CreatorType;
   localboxName: string;
@@ -115,7 +117,7 @@ export interface SubContentType {
 // 콘텐츠 목록
 export interface ContentListType {
   id: number;
-  ownerLocalboxDto: ownerLocalboxDtoType;
+  ownerLocalboxDto: OwnerLocalboxDtoType;
   deviceType: string;
   contentsType: string;
   displayYn: boolean;
@@ -134,10 +136,10 @@ export interface ContentListType {
   liked: boolean;
   disliked: boolean;
   bookmarked: boolean;
-  contentsFileDtos: contentsFileDtosType[];
-  contentsHashTagDtos: contentsHashTagDtosType[];
-  lrateHangDtos?: lrateDtosType[];
-  lrateBeopDtos?: lrateDtosType[];
+  contentsFileDtos: ContentsFileDtosType[];
+  contentsHashTagDtos: ContentsHashTagDtosType[];
+  lrateHangDtos?: LrateDtosType[];
+  lrateBeopDtos?: LrateDtosType[];
 }
 
 // 콘텐츠 상세
@@ -162,10 +164,10 @@ export interface ContentDetailType {
   disliked: boolean;
   bookmarked: boolean;
   countInfoDto: CountInfoType;
-  fileDtoList?: contentsFileDtosType[];
-  hashTagDtoList: contentsHashTagDtosType[];
-  localrateBeopDtoList: lrateDtosType[];
-  localrateHangDtoList: lrateDtosType[];
+  fileDtoList?: ContentsFileDtosType[];
+  hashTagDtoList: ContentsHashTagDtosType[];
+  localrateBeopDtoList: LrateDtosType[];
+  localrateHangDtoList: LrateDtosType[];
   contentsSignageScreenSettingSelDto: null;
   localboxDto: LocalBoxType;
   userDto: UserType;
@@ -180,5 +182,5 @@ export interface CommentType {
   likeCount: number;
   repl: string;
   updateDt: string;
-  writerLocalboxDto: writerLocalboxDtoType;
+  writerLocalboxDto: WriterLocalboxDtoType;
 }
