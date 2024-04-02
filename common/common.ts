@@ -5,3 +5,7 @@ export type NonEmptyArray<T> = readonly [T, ...T[]];
 export interface Slug {
   slug: number;
 }
+
+export interface CommonResponse {
+  message: string;
+}

@@ -1,5 +1,15 @@
 import { ContentsType } from '../contents';
 
+// Request
+
+// Response
+
+export interface LocalboxMyElementResponse {
+  message: string;
+  result: LocalboxMyElement;
+}
+
+// DTO
 export interface ContentCardType {
   isTopFixed: boolean;
   id: number;
@@ -12,6 +22,16 @@ export interface ContentCardType {
   button?: ContentCardButtonKey;
 }
 
+export interface LocalboxMyElement {
+  localboxId: number;
+  localboxName: string;
+  localboxProfileImgUrl: string;
+  localboxBadgeName: string;
+  localboxMyTownName: string;
+  localboxSubscribeYn: boolean;
+}
+
+// DataType
 export type ContentCardBadgeKey =
   | 'BADGE_RESIDENT'
   | 'BADGE_AD'
