@@ -1,3 +1,6 @@
+import { CommonResponse } from '@/types/common';
+import { MultiPolygon } from '@/types/map';
+
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
 export type ContentsType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
@@ -114,6 +117,21 @@ export interface SubContentType {
   postingContentsRepresentImgUrl: string;
   connectStatus: string;
 }
+
+// 콘텐츠 등록
+
+// 임시저장
+export type ContentTextType = '동네소식' | '주민소식' | ' 광고';
+
+export type DisplayDeviceType = '메인' | '사이니지' | '메인사이니지';
+
+export interface GetTemporaryContentItemType {
+  title: string;
+  contentType: ContentTextType;
+  displayDeviceType: DisplayDeviceType;
+  saveDate: number;
+}
+
 // 콘텐츠 목록
 export interface ContentListType {
   id: number;
@@ -183,4 +201,17 @@ export interface CommentType {
   repl: string;
   updateDt: string;
   writerLocalboxDto: WriterLocalboxDtoType;
+}
+
+/* response */
+export interface ContentRegisterResponse extends CommonResponse {
+  result: string;
+}
+
+export interface ContentVillageNewsResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface LocalBoxMyTownResponse extends CommonResponse {
+  result: string;
 }
