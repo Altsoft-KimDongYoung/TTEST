@@ -4,9 +4,9 @@ import { ContentsType } from '../contents';
 
 // Response
 
-export interface LocalboxMyElementResponse {
+export interface LocalboxMyResponse {
   message: string;
-  result: LocalboxMyElement;
+  result: LocalboxMy;
 }
 
 // DTO
@@ -22,13 +22,18 @@ export interface ContentCardType {
   button?: ContentCardButtonKey;
 }
 
-export interface LocalboxMyElement {
+export interface LocalboxMy {
   localboxId: number;
   localboxName: string;
   localboxProfileImgUrl: string;
-  localboxBadgeName: string;
+  localboxSummaryDisplayYn: boolean;
+  localboxSummary: string;
+  localboxWorkplaceAddrDisplayYn: boolean;
+  localboxWorkplaceAddr: string;
+  localboxWorkplaceContactNumberDisplayYn: boolean;
+  localboxWorkplaceBusinessHoursDisplayYn: boolean;
   localboxMyTownName: string;
-  localboxSubscribeYn: boolean;
+  localboxWorkplaceBusinessHours: boolean;
 }
 
 // DataType
