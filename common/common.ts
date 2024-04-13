@@ -1,3 +1,5 @@
+import { MultiPolygon } from '../map';
+
 export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
 export type NonEmptyArray<T> = readonly [T, ...T[]];
@@ -36,4 +38,20 @@ export interface PagingInfo {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
+}
+
+export interface AreaPointMyTownParams {
+  latiY: string | number;
+  longiX: string | number;
+}
+
+export interface AreaPointMyTownResponse extends CommonResponse {
+  result: {
+    apiId: number;
+    apiType: string;
+    apiDepth: number;
+    areaName: string;
+    areaFullName: string;
+    multiPolygonStr: MultiPolygon;
+  };
 }

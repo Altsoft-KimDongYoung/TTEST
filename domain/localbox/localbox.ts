@@ -1,3 +1,5 @@
+import { CommonResponse } from '@/types/common';
+
 import { ContentsType } from '../contents';
 
 // Request
@@ -64,3 +66,22 @@ export type ContentCardButtonValue =
   | '주민소식 삽입가능'
   | '주민소식 해제'
   | '반려사유 확인';
+
+export interface VisitTown {
+  visitTownId: number;
+  visitTownName: string;
+  visitTownLatitudeX: number;
+  visitTownLongitudeY: number;
+}
+export interface VisitTownResponse extends CommonResponse {
+  result: VisitTown[];
+}
+
+export interface LocalboxMyElement {
+  localboxId: number;
+  localboxName: string;
+  localboxProfileImgUrl: string;
+  localboxBadgeName: string;
+  localboxMyTownName: string;
+  localboxSubscribeYn: boolean;
+}

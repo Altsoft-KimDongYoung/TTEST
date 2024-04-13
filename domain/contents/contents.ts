@@ -1,5 +1,6 @@
-import { CommonResponse } from '@/types/common';
-import { MultiPolygon } from '@/types/map';
+import { CommonResponse, PagingInfo } from '@/types/common';
+
+import { LocalboxMyElement } from '../localbox';
 
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
@@ -13,109 +14,72 @@ export type CreatorType =
   | 'LOCALBOX_LOCAL_NEWSPAPER';
 
 // 콘텐츠 목록 관련 객체 type 정의
-export interface OwnerLocalboxDtoType {
-  localboxId: number;
-  localboxCreatorType: CreatorType;
-  localboxName: string;
-  townPointLongiX: number;
-  townPointLatiY: number;
-  townAreaName: string;
-  townAreaFullName: string;
-  profileImage: string;
-  subscribeYn: boolean;
-}
-
-export interface ContentsFileDtosType {
-  id: number;
-  contentsId: number;
-  fileType: string | null;
-  fileName: string;
-  showImageUrl: string;
-  locationTag: string | null;
-  represent: boolean;
-}
-
-export interface ContentsHashTagDtosType {
-  id: number;
-  contentsId: number;
+export interface ContentHashTag {
+  contentHashTagId: number;
+  contentId: number;
   hashTagId: number;
   tagName: string;
   orderNum: number;
 }
 
-export interface LrateDtosType {
-  id: number;
-  contentsId: number;
-  areaName: string;
-  areaFullName: string;
-  rate: number;
-}
-
-export interface WriterLocalboxDtoType {
+export interface CommentLocalboxDtoType {
   localboxId: number;
   localboxCreatorType: CreatorType;
   localboxName: string;
-  townPointLongiX: number;
-  townPointLatiY: number;
-  townAreaName: string;
-  townAreaFullName: string;
-  profileImage: string;
+  localboxProfileImgUrl: string;
+  localboxBadgeName?: string;
+  localboxMyTownName: string;
 }
 
-// 콘텐츠 상세 관련 객체 type 정의
-export interface CountInfoType {
-  id: number;
+// 콘텐츠 목록
+export interface ContentMainVillage {
+  contentId: number;
+  contentLikeCount: number;
+  contentReplyCount: number;
+  contentLikeYn: boolean;
+  contentNotLikeYn: boolean;
+  contentBookmarkYn: boolean;
+  contentType: string;
+  contentTitle: string;
+  contentBodyText: string;
+  contentRepresentFileType: string;
+  contentRepresentFileUrl: string;
+  contentDisplayRateDong: string;
+  contentHashTagElementDtos: ContentHashTag[];
+  regDt: string;
+  localboxElementDto: LocalboxMyElement;
+}
+
+// 콘텐츠 상세
+export interface ContentDetailDto {
+  contentId: number;
+  contentLikeCount: number;
+  contentNotLikeCount: number;
+  contentReplyCount: number;
+  contentLikeYn: boolean;
+  contentNotLikeYn: boolean;
+  contentBookmarkYn: boolean;
+  contentType: string;
+  contentTitle: string;
+  contentBody: string;
+  contentBodyText: string;
+  contentRepresentFileType: string;
+  contentRepresentFileUrl: string;
+  contentDisplayRateDong: string;
+  contentHashTagElementDtos: ContentHashTag[];
+  regDt: string;
+  localboxElementDto: LocalboxMyElement;
+}
+
+// 댓글
+export interface Comment {
   contentsId: number;
-  contentsLikeCountByNormalUser: number;
-  contentsLikeCountByJuryUser: number;
-  contentsNotLikeCountByNormalUser: number;
-  contentsNotLikeCountByJuryUser: number;
-  contentsViewCount: number;
-  contentsBookmarkCount: number;
-  contentsReplyCount: number;
-  complainProcessCount: number;
-  localityComplainProcessCount: number;
-  createDt: string;
-  updateDt: string;
-}
-
-export interface LocalBoxType {
-  localboxId: number;
-  localboxCreatorType: CreatorType;
-  localboxName: string;
-  townPointLongiX: number;
-  townPointLatiY: number;
-  townAreaName: string;
-  townAreaFullName: string;
-  profileImage: string;
-  createDt: string;
-  subscribeYn: boolean;
-}
-
-export interface UserType {
-  userId: number;
-  loginId: string;
-  mobile: string;
-  name: string;
-  nickName: string;
-  profileImage: string;
-  userType: string;
-  notifyTownLifeYn: boolean;
-  notifyEventYn: boolean;
-}
-
-export interface SubContentType {
-  villageContentsId: number;
-  villageContentsType: string;
-  villageContentsTitle: string;
-  villageContentsSummary: string;
-  villageContentsRepresentImgUrl: string;
-  postingContentsId: number;
-  postingContentsType: InsertBannerType;
-  postingContentsTitle: string;
-  postingContentsSummary: string;
-  postingContentsRepresentImgUrl: string;
-  connectStatus: string;
+  contentsReplyId: number;
+  contentReplyLikeYn: boolean;
+  contentReplyLikeCount: number;
+  contentReplyRepl: string;
+  regDt: string;
+  localboxElementDto: CommentLocalboxDtoType;
 }
 
 // 콘텐츠 등록
@@ -132,75 +96,73 @@ export interface GetTemporaryContentItemType {
   saveDate: number;
 }
 
-// 콘텐츠 목록
-export interface ContentListType {
+// 배너 리스트
+export interface Banner {
   id: number;
-  ownerLocalboxDto: OwnerLocalboxDtoType;
-  deviceType: string;
-  contentsType: string;
-  displayYn: boolean;
-  adYn: boolean;
-  deleteYn: boolean;
   title: string;
-  summary: string;
-  explanation: string;
-  displayLongitude: number;
-  displayLatitude: number;
-  representImgUrl: string;
+  description: string;
+  url: string;
+  displayYn: boolean;
+  clickCount: number;
   createDt: string;
   updateDt: string;
-  likeCount: number;
-  commentCount: number;
-  liked: boolean;
-  disliked: boolean;
-  bookmarked: boolean;
-  contentsFileDtos: ContentsFileDtosType[];
-  contentsHashTagDtos: ContentsHashTagDtosType[];
-  lrateHangDtos?: LrateDtosType[];
-  lrateBeopDtos?: LrateDtosType[];
+  bannerImageUrl: string;
+}
+/** Params & Body */
+
+export interface contentListParams {
+  displayLongitude?: number;
+  displayLatitude?: number;
+  findKeyword?: string;
+  page?: number;
+  size?: number;
 }
 
-// 콘텐츠 상세
-export interface ContentDetailType {
+export interface BannerBody {
   id: number;
-  displayDeviceType: string;
-  contentsType: string;
-  displayYn: boolean;
-  adYn: boolean;
-  deleteYn: boolean;
-  title: string;
-  summary: string;
-  explanation: string;
-  displayRadius: number;
-  displayLongitude: number;
-  displayLatitude: number;
-  representImgUrl: string;
-  representMovUrl: null;
-  createDt: string;
-  updateDt: string;
-  liked: boolean;
-  disliked: boolean;
-  bookmarked: boolean;
-  countInfoDto: CountInfoType;
-  fileDtoList?: ContentsFileDtosType[];
-  hashTagDtoList: ContentsHashTagDtosType[];
-  localrateBeopDtoList: LrateDtosType[];
-  localrateHangDtoList: LrateDtosType[];
-  contentsSignageScreenSettingSelDto: null;
-  localboxDto: LocalBoxType;
-  userDto: UserType;
-  postingContentsInfoDto: SubContentType;
 }
 
-// 댓글
-export interface CommentType {
-  contentsId: number;
-  contentsReplyId: number;
-  liked: boolean;
-  likeCount: number;
+export interface SetYnBody {
+  contentId: number;
+  setYn: boolean;
+}
+
+export interface SubscribeBody {
+  targetLocalboxId: number;
+  subscribeYn: boolean;
+}
+
+export interface ContentReplyBody {
+  contentId: number;
   repl: string;
-  updateDt: string;
-  writerLocalboxDto: WriterLocalboxDtoType;
+}
+
+/** Response */
+
+export interface ContentMainVillageResponse extends CommonResponse {
+  result: {
+    content: ContentMainVillage[];
+  } & PagingInfo;
+}
+
+export interface ContentLikeResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ContentDisLikeResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ContentBookmarkResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ContentReplyResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface BannerResponse extends CommonResponse {
+  result: Banner[];
 }
 
 /* response */
