@@ -3,7 +3,7 @@ import { MultiPolygon } from '../map';
 export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
 export type NonEmptyArray<T> = readonly [T, ...T[]];
-
+export type Many<T> = T | NonEmptyArray<T>;
 export interface Slug {
   slug: number;
 }

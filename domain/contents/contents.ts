@@ -1,6 +1,7 @@
 import { CommonResponse, PagingInfo } from '@/types/common';
 
 import { LocalboxMyElement } from '../localbox';
+import { DisplayGpsSettingType } from './villages';
 
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
@@ -85,15 +86,27 @@ export interface Comment {
 // 콘텐츠 등록
 
 // 임시저장
-export type ContentTextType = '동네소식' | '주민소식' | ' 광고';
-
-export type DisplayDeviceType = '메인' | '사이니지' | '메인사이니지';
-
-export interface GetTemporaryContentItemType {
+export type ContentTempType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
+export type ContentTempDisplayDeviceType = 'MOBILE' | 'SIGNAGE' | 'MIXED';
+export interface ContentTempItem {
+  contentTempId: number;
+  contentType: ContentTempType;
+  displayDeviceType: ContentTempDisplayDeviceType;
   title: string;
-  contentType: ContentTextType;
-  displayDeviceType: DisplayDeviceType;
-  saveDate: number;
+  body: string;
+  bodyText: string;
+  representFileType: 'IMG_FILE';
+  representFileUrl: string;
+  displayGpsSetting: DisplayGpsSettingType;
+  hashTags: string[];
+}
+
+export interface ContentTempContent {
+  contentTempId: number;
+  contentType: ContentTempType;
+  displayDeviceType: ContentTempDisplayDeviceType;
+  contentTitle: string;
+  regDt: string;
 }
 
 // 배너 리스트
@@ -165,6 +178,28 @@ export interface BannerResponse extends CommonResponse {
   result: Banner[];
 }
 
+/**params */
+
+export interface ContentTempParams {
+  page?: number;
+  size?: number;
+}
+
+export interface ContentTempItemParams {
+  contentTempId: number;
+}
+
+/**params */
+
+export interface ContentTempParams {
+  page?: number;
+  size?: number;
+}
+
+export interface ContentTempItemParams {
+  contentTempId: number;
+}
+
 /* response */
 export interface ContentRegisterResponse extends CommonResponse {
   result: string;
@@ -176,4 +211,18 @@ export interface ContentVillageNewsResponse extends CommonResponse {
 
 export interface LocalBoxMyTownResponse extends CommonResponse {
   result: string;
+}
+
+export interface ContentTempResponse extends CommonResponse {
+  result: {
+    content: ContentTempContent[];
+  } & PagingInfo;
+}
+
+export interface ContentTempItemResponse extends CommonResponse {
+  result: ContentTempItem;
+}
+
+export interface ContentTempItemDeleteResponse extends CommonResponse {
+  result: boolean;
 }
