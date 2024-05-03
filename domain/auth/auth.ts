@@ -66,6 +66,22 @@ export interface SignupApartmentForm {
   profileImg: File | null;
 }
 
+/** @Auth 관공서회원 폼 */
+export interface SignupGvmtForm {
+  loginId: string;
+  password: string;
+  passwordConfirm: string;
+  name: string;
+  nickname: string;
+  mobile: string;
+  email: string;
+  organizationName: string;
+  organizationId: string;
+  contactNumber: string;
+  contactName: string;
+  profileImg: File | null;
+}
+
 /** @RequestParams PinCode SMS, Email 전송 */
 export interface UserSendJoinParams {
   userName: string;
@@ -106,16 +122,16 @@ export interface AreaPointMyTownResponse {
   multiPolygonStr: any;
 }
 
-/** @RequeryParams 아파트명으로 검색하는 리스트 페이지 조회 */
-export interface OrganizationApartmentParams {
+/** @RequestParams 기관 검색 조회 */
+export interface OrganizationParams {
   organizationName: string;
   page?: string;
   size?: string;
 }
 
-/** @Response 아파트명으로 검색하는 리스트 페이지 조회 */
-export interface OrganizationApartmentResponse {
-  content: ApartmentContent[];
+/** @Response 기관 검색 조회 */
+export interface OrganizationResponse<T = ApartmentContent | GvmtContent> {
+  content: T[];
   pageable: ApartmentPageable;
   totalPages: number;
   totalElements: number;
@@ -128,8 +144,7 @@ export interface OrganizationApartmentResponse {
   empty: boolean;
 }
 
-/** @OrganizationApartmentResponse content */
-export interface ApartmentContent {
+export interface OrganizationContent {
   id: number;
   parentId: number;
   organizationType: string;
@@ -143,7 +158,13 @@ export interface ApartmentContent {
   updateDt: string;
 }
 
-/** @OrganizationApartmentResponse pageable */
+export interface ApartmentContent extends OrganizationContent {}
+export interface GvmtContent extends OrganizationContent {
+  organizationDetailAddr: string;
+  organizationAddrAreaName: string;
+  organizationAddrAreaFullName: string;
+}
+
 export interface ApartmentPageable {
   sort: ApartmentSort;
   pageNumber: number;
@@ -153,7 +174,6 @@ export interface ApartmentPageable {
   unpaged: boolean;
 }
 
-/** @OrganizationApartmentResponse sort */
 export interface ApartmentSort {
   sorted: boolean;
   unsorted: boolean;
