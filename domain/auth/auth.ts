@@ -164,21 +164,29 @@ export interface OrganizationParams {
 
 /** @Response 기관 검색 조회 */
 export interface OrganizationResponse<T = ApartmentContent | GvmtContent> {
-  content: T[];
-  pageable: ApartmentPageable;
-  totalPages: number;
-  totalElements: number;
-  last: boolean;
-  number: number;
-  size: number;
-  sort: ApartmentSort;
-  numberOfElements: number;
-  first: boolean;
-  empty: boolean;
+  result: {
+    content: T[];
+    pageable: ApartmentPageable;
+    totalPages: number;
+    totalElements: number;
+    last: boolean;
+    number: number;
+    size: number;
+    sort: ApartmentSort;
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
+  };
+  message: string;
 }
 
 /** @Response 부모 행정기관 조회(By 좌표) */
 export type OrganizationParentHierarchyListResponse = ParentHierarchy[];
+
+/** @Response PinCode SMS 인증, E-Mail 인증(아이디 찾기용) */
+export interface FindLoginIdResponse {
+  loginId: string;
+}
 
 export interface OrganizationContent {
   id: number;
