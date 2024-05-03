@@ -1,4 +1,8 @@
-import { CommonResponse, PagingInfo } from '@/types/common';
+import {
+  CommonResponse,
+  LocalboxCreatorType,
+  PagingInfo,
+} from '@/types/common';
 
 import { LocalboxMyElement } from '../localbox';
 import { DisplayGpsSettingType } from './villages';
@@ -6,13 +10,6 @@ import { DisplayGpsSettingType } from './villages';
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
 export type ContentsType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
-
-export type CreatorType =
-  | 'LOCALBOX_MEMBER'
-  | 'LOCALBOX_BUSINESS'
-  | 'LOCALBOX_GVMT'
-  | 'LOCALBOX_APARTMENT'
-  | 'LOCALBOX_LOCAL_NEWSPAPER';
 
 // 콘텐츠 목록 관련 객체 type 정의
 export interface ContentHashTag {
@@ -25,7 +22,7 @@ export interface ContentHashTag {
 
 export interface CommentLocalboxDtoType {
   localboxId: number;
-  localboxCreatorType: CreatorType;
+  localboxCreatorType: LocalboxCreatorType;
   localboxName: string;
   localboxProfileImgUrl: string;
   localboxBadgeName?: string;

@@ -8,6 +8,23 @@ export interface Slug {
   slug: number;
 }
 
+export interface CommonKeyLabel<T> {
+  key: T;
+  label: string;
+}
+
+export type ApiResponseSuccess<T> = {
+  message: string;
+  result: T;
+};
+
+export type ApiResponseFailed = {
+  returnCode: string;
+  description: string;
+};
+
+// export type ApiResponse<T> = ApiResponseSuccess<T> | ApiResponseFailed;
+export type ApiResponse<T> = ApiResponseSuccess<T>;
 export interface CommonResponse {
   message: string;
 }
