@@ -11,6 +11,46 @@ export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
 export type ContentsType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
 
+export type ContentTextType = '동네소식' | '주민소식' | ' 광고';
+
+export type DisplayDeviceType = '메인' | '사이니지' | '메인사이니지';
+
+export const COMPLAIN_TYPE = [
+  {
+    label: '이미지, 사진, 콘텐츠 도용',
+    value: 'STEAL_CONTENTS',
+  },
+  {
+    label: '사행성 광고',
+    value: 'GAMBLING_AD',
+  },
+  {
+    label: '음란성 광고',
+    value: 'OBSCENE_AD',
+  },
+  {
+    label: '불법적인 내용',
+    value: 'ILLEGAL_SUBSTANCE',
+  },
+  {
+    label: '욕설, 비방',
+    value: 'SWEAR_WORD',
+  },
+  {
+    label: '기타',
+    value: 'ET_CETERA',
+  },
+];
+
+export type ComplainType =
+  | 'ET_CETERA'
+  | 'STEAL_CONTENT'
+  | 'GAMBLING_AD'
+  | 'OBSCENE_AD'
+  | 'ILLEGAL_SUBSTANCE'
+  | 'SWEAR_WORD'
+  | string;
+
 // 콘텐츠 목록 관련 객체 type 정의
 export interface ContentHashTag {
   contentHashTagId: number;
@@ -25,8 +65,21 @@ export interface CommentLocalboxDtoType {
   localboxCreatorType: LocalboxCreatorType;
   localboxName: string;
   localboxProfileImgUrl: string;
-  localboxBadgeName?: string;
+  localboxBadgeName: string;
   localboxMyTownName: string;
+  localboxSubscribeYn: boolean;
+  townPointLongiX?: number; // 🔥 수정 필요
+  townPointLatiY?: number; // 🔥 수정 필요
+}
+
+export interface PostingContent {
+  contentId: number;
+  contentType: 'AD' | 'RESIDENT_NEWS';
+  contentTitle: string;
+  contentRepresentFileType: string;
+  contentRepresentFileUrl: string;
+  mainDisplayCount: number;
+  signageDisplayCount: number;
 }
 
 // 콘텐츠 목록
@@ -60,19 +113,19 @@ export interface ContentDetailDto {
   contentType: string;
   contentTitle: string;
   contentBody: string;
-  contentBodyText: string;
   contentRepresentFileType: string;
   contentRepresentFileUrl: string;
-  contentDisplayRateDong: string;
+  contentDisplayRateDong?: string; // 🔥 수정 필요
   contentHashTagElementDtos: ContentHashTag[];
   regDt: string;
   localboxElementDto: LocalboxMyElement;
+  postingContentDto?: PostingContent;
 }
 
 // 댓글
 export interface Comment {
-  contentsId: number;
-  contentsReplyId: number;
+  contentId: number;
+  contentReplyId: number;
   contentReplyLikeYn: boolean;
   contentReplyLikeCount: number;
   contentReplyRepl: string;
@@ -81,6 +134,14 @@ export interface Comment {
 }
 
 // 콘텐츠 등록
+
+// 임시저장
+export interface GetTemporaryContentItemType {
+  title: string;
+  contentType: ContentTextType;
+  displayDeviceType: DisplayDeviceType;
+  saveDate: number;
+}
 
 // 임시저장
 export type ContentTempType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
@@ -128,6 +189,12 @@ export interface contentListParams {
   size?: number;
 }
 
+export interface CommentReplyParams {
+  contentId: number;
+  page?: number;
+  size?: number;
+}
+
 export interface BannerBody {
   id: number;
 }
@@ -142,13 +209,35 @@ export interface SubscribeBody {
   subscribeYn: boolean;
 }
 
+export interface ContentReplyListParams {
+  contentId: number;
+  page?: number;
+  size?: number;
+}
+
 export interface ContentReplyBody {
   contentId: number;
   repl: string;
 }
 
-/** Response */
+export interface ContentReplyLikeBody {
+  contentReplyId: number;
+  setYn: boolean;
+}
 
+export interface ComplainContentReplyBody {
+  contentReplyId: number;
+  complainType: ComplainType;
+  explanation: string;
+}
+
+export interface ComplainContentBody {
+  contentId: number;
+  complainType: ComplainType;
+  explanation?: string;
+}
+
+/** Response */
 export interface ContentMainVillageResponse extends CommonResponse {
   result: {
     content: ContentMainVillage[];
@@ -197,7 +286,17 @@ export interface ContentTempItemParams {
   contentTempId: number;
 }
 
-/* response */
+/**params */
+
+export interface ContentTempParams {
+  page?: number;
+  size?: number;
+}
+
+export interface ContentTempItemParams {
+  contentTempId: number;
+}
+
 export interface ContentRegisterResponse extends CommonResponse {
   result: string;
 }
@@ -221,5 +320,39 @@ export interface ContentTempItemResponse extends CommonResponse {
 }
 
 export interface ContentTempItemDeleteResponse extends CommonResponse {
+  result: boolean;
+}
+
+/** 콘텐츠 상세 조회 response */
+export interface ContentDetailResponse extends CommonResponse {
+  result: ContentDetailDto;
+}
+export interface ContentCommentResponse extends CommonResponse {
+  result: {
+    content: Comment[];
+  } & PagingInfo;
+}
+
+export interface ContentReplyRegisterResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ContentReplyDeleteResponse extends CommonResponse {
+  result: string;
+}
+
+export interface ContentReplyLikeResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ContentDeleteResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ComplainContentReplyResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface ComplainContentResponse extends CommonResponse {
   result: boolean;
 }
