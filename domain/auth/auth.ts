@@ -26,7 +26,7 @@ export interface SignupMemberForm {
   profileImg: File | null;
 }
 
-/** @회원가입 @기업회원  폼 */
+/** @Auth 기업회원 폼 */
 export interface SignupBusinessForm {
   loginId: string;
   password: string;
@@ -50,24 +50,45 @@ export interface SignupBusinessForm {
   businessAddressPointLatiY: string;
 }
 
-/** @RequestParams 회원가입 PinCode SMS, Email 전송 */
+/** @Auth 아파트회원 폼 */
+export interface SignupApartmentForm {
+  loginId: string;
+  password: string;
+  passwordConfirm: string;
+  name: string;
+  nickname: string;
+  mobile: string;
+  email: string;
+  organizationId: string;
+  contactNumber: string;
+  ownerName: string;
+  organizationName: string;
+  profileImg: File | null;
+}
+
+/** @RequestParams PinCode SMS, Email 전송 */
 export interface UserSendJoinParams {
   userName: string;
   mobile: string;
   email: string;
 }
 
-/** @RequestParams 회원가입 PinCode SMS, Email 인증 */
+/** @RequestParams PinCode SMS, Email 인증 */
 export interface UserJoinConfirmParams {
   mobile: string;
   email: string;
   pinCode: string;
 }
 
-/** @RequestParams 회원가입 내 동네 영역 조회 */
+/** @RequestParams 내 동네 영역 조회(Point)*/
 export interface AreaPointMyTownParams {
   latiY: string | number;
   longiX: string | number;
+}
+
+/** @RequestParams 내 동네 영역 조회(OrganizationId)*/
+export interface OrganizationMyTownParams {
+  ohId: string | number;
 }
 
 /** @RequestParams 아이디 중복 체크 */
@@ -75,7 +96,7 @@ export interface UserCheckDuplicateLoginIdParams {
   loginId: string;
 }
 
-/** @Response 회원가입 내 동네 영역 조회 */
+/** @Response 내 동네 영역 조회 */
 export interface AreaPointMyTownResponse {
   apiId: number;
   apiType: string;
@@ -83,4 +104,58 @@ export interface AreaPointMyTownResponse {
   areaName: string;
   areaFullName: string;
   multiPolygonStr: any;
+}
+
+/** @RequeryParams 아파트명으로 검색하는 리스트 페이지 조회 */
+export interface OrganizationApartmentParams {
+  organizationName: string;
+  page?: string;
+  size?: string;
+}
+
+/** @Response 아파트명으로 검색하는 리스트 페이지 조회 */
+export interface OrganizationApartmentResponse {
+  content: ApartmentContent[];
+  pageable: ApartmentPageable;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  number: number;
+  size: number;
+  sort: ApartmentSort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
+}
+
+/** @OrganizationApartmentResponse content */
+export interface ApartmentContent {
+  id: number;
+  parentId: number;
+  organizationType: string;
+  organizationDepth: number;
+  organizationName: string;
+  existManager: boolean;
+  organizationBaseAddr: string;
+  organizationAddrPointX: number;
+  organizationAddrPointY: number;
+  createDt: string;
+  updateDt: string;
+}
+
+/** @OrganizationApartmentResponse pageable */
+export interface ApartmentPageable {
+  sort: ApartmentSort;
+  pageNumber: number;
+  pageSize: number;
+  offset: number;
+  paged: boolean;
+  unpaged: boolean;
+}
+
+/** @OrganizationApartmentResponse sort */
+export interface ApartmentSort {
+  sorted: boolean;
+  unsorted: boolean;
+  empty: boolean;
 }
