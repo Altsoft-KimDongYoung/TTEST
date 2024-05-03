@@ -26,6 +26,30 @@ export interface SignupMemberForm {
   profileImg: File | null;
 }
 
+/** @회원가입 @기업회원  폼 */
+export interface SignupBusinessForm {
+  loginId: string;
+  password: string;
+  passwordConfirm: string;
+  mobile: string;
+  name: string;
+  nickname: string;
+  email: string;
+  businessName: string;
+  businessNumber: string;
+  ownerName: string;
+  businessContactNumber: string;
+  serviceName: string;
+  homepageUrl: string;
+  openDt: string;
+  licenseImg: File | null;
+  baseAddr: string;
+  detailAddr: string;
+  profileImg: File | null;
+  businessAddressPointLongiX: string;
+  businessAddressPointLatiY: string;
+}
+
 /** @RequestParams 회원가입 PinCode SMS, Email 전송 */
 export interface UserSendJoinParams {
   userName: string;
