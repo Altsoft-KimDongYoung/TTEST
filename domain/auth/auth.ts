@@ -1,4 +1,4 @@
-import type { UserType, UserTypeLabel } from '@/types/common';
+import type { CommonResponse, UserType, UserTypeLabel } from '@/types/common';
 
 /** @Auth 회원유형 아이템 */
 export interface SelectUserTypeItem {
@@ -123,6 +123,20 @@ export interface UserJoinConfirmParams {
   pinCode: string;
 }
 
+/** @RequestParams 비밀번호 변경 */
+export interface ResetPasswordParams {
+  loginId: string;
+  mobile: string;
+  email: string;
+}
+
+/** @RequestBody 비밀번호 변경 */
+export interface ResetPasswordBody {
+  mobile: string;
+  email: string;
+  password: string;
+}
+
 /** @RequestParams 내 동네 영역 조회(Point)*/
 export interface AreaPointMyTownParams {
   latiY: string | number;
@@ -164,20 +178,17 @@ export interface OrganizationParams {
 
 /** @Response 기관 검색 조회 */
 export interface OrganizationResponse<T = ApartmentContent | GvmtContent> {
-  result: {
-    content: T[];
-    pageable: ApartmentPageable;
-    totalPages: number;
-    totalElements: number;
-    last: boolean;
-    number: number;
-    size: number;
-    sort: ApartmentSort;
-    numberOfElements: number;
-    first: boolean;
-    empty: boolean;
-  };
-  message: string;
+  content: T[];
+  pageable: ApartmentPageable;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  number: number;
+  size: number;
+  sort: ApartmentSort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }
 
 /** @Response 부모 행정기관 조회(By 좌표) */
