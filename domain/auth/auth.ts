@@ -64,6 +64,7 @@ export interface SignupApartmentForm {
   ownerName: string;
   organizationName: string;
   profileImg: File | null;
+  employmentFile: File | null;
 }
 
 /** @Auth 관공서회원 폼 */
@@ -80,6 +81,32 @@ export interface SignupGvmtForm {
   contactNumber: string;
   contactName: string;
   profileImg: File | null;
+  employmentFile: File | null;
+}
+
+/** @Auth 지역 신문사회원 폼 */
+export interface SignupLocalNewspaperForm {
+  loginId: string;
+  password: string;
+  passwordConfirm: string;
+  name: string;
+  nickname: string;
+  mobile: string;
+  email: string;
+  organizationName: string;
+  organizationId: string;
+  businessName: string;
+  businessNumber: string;
+  openDt: string;
+  ownerName: string;
+  businessContactNumber: string;
+  newspaperName: string;
+  newspaperNumber: string;
+  baseAddr: string;
+  detailAddr: string;
+  profileImg: File | null;
+  licenseImg: File | null;
+  employmentFile: File | null;
 }
 
 /** @RequestParams PinCode SMS, Email 전송 */
@@ -110,6 +137,12 @@ export interface OrganizationMyTownParams {
 /** @RequestParams 아이디 중복 체크 */
 export interface UserCheckDuplicateLoginIdParams {
   loginId: string;
+}
+
+/** @RequestParams 부모 행정기관 조회(By 좌표) */
+export interface OrganizationParentHierarchyListParams {
+  latiY: string;
+  longiX: string;
 }
 
 /** @Response 내 동네 영역 조회 */
@@ -143,6 +176,9 @@ export interface OrganizationResponse<T = ApartmentContent | GvmtContent> {
   first: boolean;
   empty: boolean;
 }
+
+/** @Response 부모 행정기관 조회(By 좌표) */
+export type OrganizationParentHierarchyListResponse = ParentHierarchy[];
 
 export interface OrganizationContent {
   id: number;
@@ -178,4 +214,20 @@ export interface ApartmentSort {
   sorted: boolean;
   unsorted: boolean;
   empty: boolean;
+}
+
+export interface ParentHierarchy {
+  id: number;
+  parentId: number;
+  organizationType: string;
+  organizationDepth: number;
+  organizationName: string;
+  organizationBaseAddr: string;
+  organizationDetailAddr: string;
+  organizationAddrPointX: number;
+  organizationAddrPointY: number;
+  organizationAddrAreaName: string;
+  organizationAddrAreaFullName: string;
+  createDt: string;
+  updateDt: string;
 }
