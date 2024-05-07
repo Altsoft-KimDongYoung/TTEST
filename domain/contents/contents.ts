@@ -101,6 +101,12 @@ export interface ContentMainVillage {
   localboxElementDto: LocalboxMyElement;
 }
 
+interface DisplayInfoDto {
+  displayRadius: number;
+  displayLongitude: number;
+  displayLatitude: number;
+}
+
 // 콘텐츠 상세
 export interface ContentDetailDto {
   contentId: number;
@@ -120,6 +126,7 @@ export interface ContentDetailDto {
   regDt: string;
   localboxElementDto: LocalboxMyElement;
   postingContentDto?: PostingContent;
+  displayInfo: DisplayInfoDto;
 }
 
 // 댓글
@@ -179,6 +186,7 @@ export interface Banner {
   updateDt: string;
   bannerImageUrl: string;
 }
+
 /** Params & Body */
 
 export interface contentListParams {
