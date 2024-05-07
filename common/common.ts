@@ -8,6 +8,11 @@ export interface Slug {
   slug: number;
 }
 
+export interface CommonRequest {
+  page?: number;
+  size?: number;
+}
+
 export interface CommonKeyLabel<T> {
   key: T;
   label: string;
