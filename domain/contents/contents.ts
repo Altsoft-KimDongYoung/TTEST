@@ -178,13 +178,13 @@ export interface ContentTempContent {
 export interface Banner {
   id: number;
   title: string;
-  description: string;
+  explanation: string;
   url: string;
   displayYn: boolean;
   clickCount: number;
   createDt: string;
   updateDt: string;
-  bannerImageUrl: string;
+  bannerFileUrl: string;
 }
 
 /** Params & Body */
@@ -309,8 +309,9 @@ export interface ContentRegisterResponse extends CommonResponse {
   result: string;
 }
 
+/** @Response 동네소식 등록 */
 export interface ContentVillageNewsResponse extends CommonResponse {
-  result: boolean;
+  result: { id: number };
 }
 
 export interface LocalBoxMyTownResponse extends CommonResponse {
