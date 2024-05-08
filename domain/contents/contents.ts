@@ -83,7 +83,7 @@ export interface PostingContent {
 }
 
 // 콘텐츠 목록
-export interface ContentMainVillage {
+export interface ContentListDto {
   contentId: number;
   contentLikeCount: number;
   contentReplyCount: number;
@@ -121,7 +121,7 @@ export interface ContentDetailDto {
   contentBody: string;
   contentRepresentFileType: string;
   contentRepresentFileUrl: string;
-  contentDisplayRateDong?: string; // 🔥 수정 필요
+  contentDisplayRateDong?: string;
   contentHashTagElementDtos: ContentHashTag[];
   regDt: string;
   localboxElementDto: LocalboxMyElement;
@@ -245,10 +245,25 @@ export interface ComplainContentBody {
   explanation?: string;
 }
 
+/** @Request 로컬박스의 콘텐츠 개수 조회 params */
+export interface ContentCountParams {
+  contentType: ContentsType;
+  deviceTypes: string;
+}
+
+/**params */
+export interface ContentTempParams {
+  page?: number;
+  size?: number;
+}
+
+export interface ContentTempItemParams {
+  contentTempId: number;
+}
 /** Response */
-export interface ContentMainVillageResponse extends CommonResponse {
+export interface ContentListResponse extends CommonResponse {
   result: {
-    content: ContentMainVillage[];
+    content: ContentListDto[];
   } & PagingInfo;
 }
 
@@ -272,44 +287,12 @@ export interface BannerResponse extends CommonResponse {
   result: Banner[];
 }
 
-/**params */
-
-export interface ContentTempParams {
-  page?: number;
-  size?: number;
-}
-
-export interface ContentTempItemParams {
-  contentTempId: number;
-}
-
-/**params */
-
-export interface ContentTempParams {
-  page?: number;
-  size?: number;
-}
-
-export interface ContentTempItemParams {
-  contentTempId: number;
-}
-
-/**params */
-
-export interface ContentTempParams {
-  page?: number;
-  size?: number;
-}
-
-export interface ContentTempItemParams {
-  contentTempId: number;
-}
-
 export interface ContentRegisterResponse extends CommonResponse {
   result: string;
 }
 
 /** @Response 동네소식 등록 */
+
 export interface ContentVillageNewsResponse extends CommonResponse {
   result: { id: number };
 }
@@ -364,4 +347,9 @@ export interface ComplainContentReplyResponse extends CommonResponse {
 
 export interface ComplainContentResponse extends CommonResponse {
   result: boolean;
+}
+
+/** @Response 콘텐츠 개수 조회 응답 값 */
+export interface ContentCountResponse extends CommonResponse {
+  result: number;
 }
