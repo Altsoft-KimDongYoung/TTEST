@@ -30,6 +30,11 @@ export type ApiResponseFailed = {
 
 // export type ApiResponse<T> = ApiResponseSuccess<T> | ApiResponseFailed;
 export type ApiResponse<T> = ApiResponseSuccess<T>;
+export interface CommonRequest {
+  page?: number;
+  size?: number;
+}
+
 export interface CommonResponse {
   message: string;
 }

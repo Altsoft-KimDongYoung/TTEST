@@ -23,7 +23,7 @@ export interface SignageGroupApprovalDeleteParams {
 }
 
 export interface SignageApprovedGroupParams extends CommonRequest {
-  paidYn?: boolean;
+  signageGroupPlayStatus?: GroupPlayStatus;
 }
 
 export interface SignageGroupDetailParams extends CommonRequest {
@@ -44,6 +44,28 @@ export interface SignageDeviceCanRegisterParams {
   page: number;
   size: number;
 }
+
+export type WillPayGroupDetailParams = string[];
+
+export interface ApplyPaymentGroupBody {
+  groupIds: string[];
+}
+
+export interface SignageGroupDeleteParams {
+  groupId: number;
+}
+
+export interface CancelPayGroupDetailParams {
+  groupId: string;
+}
+
+/** @Request 그룹 결제 취소에 사용되는 파라미터 */
+export interface CancelPayGroupParams {
+  groupId: string;
+}
+
+/** @Request fetchApprovedNotPayGroup의 파라미터 */
+export interface ApprovedNotPayGroupParams extends CommonRequest {}
 
 // Response
 export interface SignageDeviceSpecResponse extends CommonResponse {
@@ -127,9 +149,50 @@ export interface SignageGroupApprovalDetailResponse extends CommonResponse {
   result: SignageGroupApprovalDetail;
 }
 
+export interface SignageGroupApprovalDetailResponse extends CommonResponse {
+  result: SignageGroupApprovalDetail;
+}
+
 export interface SignageDeviceCanRegisterResponse extends CommonResponse {
   result: {
     content: DeviceCanRegister[];
+  } & PagingInfo;
+}
+
+export interface WillPayGroupDetailResponse extends CommonResponse {
+  result: {
+    signageGroupElementDtos: PaySignageGroup[];
+    deviceSumCount: number;
+    nextPaymentDateTime: string;
+    paymentAmount: number;
+  };
+}
+
+export interface ApplyPaymentGroupResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface SignageGroupDeleteResponse extends CommonResponse {
+  result: boolean;
+}
+
+export interface CancelPayGroupDetailResponse extends CommonResponse {
+  result: {
+    signageGroupElementDto: PaySignageGroup;
+    deviceSumCount: number;
+    serviceEndTime: string;
+  };
+}
+
+/** @Response 그룹 결제 취소에 응답 */
+export interface CancelPayGroupResponse extends CommonResponse {
+  result: boolean;
+}
+
+/** @Response fetchApprovedNotPayGroup의 응답 */
+export interface ApprovedNotPayGroupResponse extends CommonResponse {
+  result: {
+    content: ApprovedNotPayGroup[];
   } & PagingInfo;
 }
 
@@ -164,13 +227,16 @@ export interface SignageGroupHistory {
 
 export interface ApprovedSignageGroup {
   groupId: number;
+  approvalId: number;
   groupRatioType: Exclude<DeviceRatio, null>;
   groupName: string;
   deviceSumCount: number;
-  reservationProjectSumCount: number;
-  deviceOperateYn: boolean;
-  serviceEndTime: string;
+  deviceHealthOffCount: number;
+  reservationProjectSumCount?: number;
+  signageGroupPlayStatus: GroupPlayStatus;
+  serviceEndTime?: string;
   signageProjectElementDto?: SignageProjectElement;
+  paymentStatus?: PaymentStatus;
 }
 
 export interface SignageProjectElement {
@@ -186,6 +252,23 @@ export interface SignageGroupDetail {
   signageDevicePlayStatus: SignageDevicePlayStatus;
   deviceHealthYn: string;
   deviceName: string;
+}
+
+export interface SignageGroupApprovalDetail {
+  groupId: number;
+  approvalId: number;
+  status: SignageGroupHistoryStatus;
+  groupName: string;
+  ratioType: Exclude<DeviceRatio, null>;
+  deviceIdList: number[];
+  fileDetailDtoList: ImageFileDetail[];
+}
+
+export interface ImageFileDetail {
+  fileId: number;
+  fileType: string;
+  fileName: string;
+  url: string;
 }
 export interface SignageGroupApprovalDetail {
   groupId: number;
@@ -211,6 +294,45 @@ export interface DeviceCanRegister {
   isInGroup: boolean;
 }
 
+export interface DeviceCanRegister {
+  deviceId: number;
+  deviceName: string;
+  ratioType: Exclude<DeviceRatio, null>;
+  isInGroup: boolean;
+}
+
+export interface DeviceCanRegister {
+  deviceId: number;
+  deviceName: string;
+  ratioType: Exclude<DeviceRatio, null>;
+  isInGroup: boolean;
+}
+
+export interface PaySignageGroup {
+  signageGroupId: number;
+  signageGroupRatioType: Exclude<DeviceRatio, null>;
+  signageGroupName: string;
+  deviceSumCount: number;
+  playYn: boolean;
+}
+
+export interface WillPayReciptInfo {
+  deviceSumCount: number;
+  nextPaymentDateTime: string;
+  paymentAmount: number;
+}
+
+/** @DTO 승인되었지만 결제는 안된 그룹 */
+export interface ApprovedNotPayGroup {
+  groupId: number;
+  approvalId: number;
+  signageGroupApprovalStatus: SignageGroupHistoryStatus;
+  groupRatioType: Exclude<DeviceRatio, null>;
+  groupName: string;
+  deviceSumCount: number;
+  approvalUpdateDt: string;
+}
+
 export type DeviceRatio = 'HOR_16_9' | 'VER_9_16' | null;
 
 export type SignageDevicePlayStatus = 'PLAY_OFF' | 'PLAY_ON' | 'POWER_OFF';
@@ -232,14 +354,29 @@ export type SignageGroupHistoryStatus =
 
 export type GroupDisplayCanType =
   | 'NOT_EXISTENT_GROUP'
-  | 'EXISTENT_APPROVAL_CONFIRM_ING_GROUP'
-  | 'NOT_REG_PAYMENT'
-  | 'EXISTENT_GROUP';
+  | 'NOT_EXISTENT_APPROVED_GROUP'
+  | 'NOT_EXISTENT_PAYMENT'
+  | 'EXISTENT_GROUP'
+  | 'NOT_EXISTENT_PAID_GROUP';
 
 export type GroupApplyRejectType =
   | 'ET_CETERA'
   | 'WRONG_IMG_UPLOAD'
   | 'NOT_INSTALLED_SIGNAGE_GROUP';
+
+export interface SignageDeviceDisplayCan {
+  signageDeviceDisplayCanType: DisplayCanType;
+}
+export type PaymentStatus =
+  | 'UNPAID_STATUS'
+  | 'PAYMENT_STATUS'
+  | 'PAYMENT_END_WAITING_STATUS';
+
+export type GroupPlayStatus =
+  | 'ALL_DEVICE_POWER_OFF'
+  | 'ALL_DEVICE_POWER_ON'
+  | 'SOME_DEVICE_POWER_OFF'
+  | null;
 
 // DataType
 export type ReferralSource =
@@ -247,16 +384,3 @@ export type ReferralSource =
   | { label: '전단지'; value: 'INFLOW_AD_FLYER' }
   | { label: '광고 전화'; value: 'INFLOW_AD_CALL' }
   | { label: '온닫이 어플'; value: 'INFLOW_ONDAJI_APPLICATION' };
-
-export type DeviceRatio = 'HOR_16_9' | 'VER_9_16' | null;
-
-export type SignageDevicePlayStatus = 'PLAY_OFF' | 'PLAY_ON' | 'POWER_OFF';
-
-export type GroupRegYn = boolean | null;
-
-export type PowerOn = boolean | null;
-
-export type DisplayCanType =
-  | 'EXISTENT_DEVICE'
-  | 'EXISTENT_APPROVAL_CONFIRM_ING_DEVICE'
-  | 'NOT_EXISTENT_DEVICE';
