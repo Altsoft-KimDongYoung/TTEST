@@ -4,6 +4,10 @@ export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
 export type NonEmptyArray<T> = readonly [T, ...T[]];
 export type Many<T> = T | NonEmptyArray<T>;
+export type IndexSignature<T extends string | number | symbol, U> = {
+  [key in T]: U;
+};
+
 export interface Slug {
   slug: number;
 }
