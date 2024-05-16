@@ -1,4 +1,4 @@
-import { MultiPolygon } from '../map';
+import { MultiPolygon } from './map';
 
 export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
@@ -32,7 +32,6 @@ export type ApiResponseFailed = {
   description: string;
 };
 
-// export type ApiResponse<T> = ApiResponseSuccess<T> | ApiResponseFailed;
 export type ApiResponse<T> = ApiResponseSuccess<T>;
 export interface CommonRequest {
   page?: number;
@@ -76,13 +75,11 @@ export interface AreaPointMyTownParams {
   longiX: string | number;
 }
 
-export interface AreaPointMyTownResponse extends CommonResponse {
-  result: {
-    apiId: number;
-    apiType: string;
-    apiDepth: number;
-    areaName: string;
-    areaFullName: string;
-    multiPolygonStr: MultiPolygon;
-  };
+export interface AreaPointMyTownResponse {
+  apiId: number;
+  apiType: string;
+  apiDepth: number;
+  areaName: string;
+  areaFullName: string;
+  multiPolygonStr: MultiPolygon;
 }

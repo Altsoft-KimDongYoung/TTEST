@@ -1,4 +1,10 @@
-import type { CommonResponse, UserType, UserTypeLabel } from '@/types/common';
+import type {
+  CommonResponse,
+  LocalboxCreatorType,
+  UserRoles,
+  UserType,
+  UserTypeLabel,
+} from '@/types/common';
 
 /** @Auth 회원유형 아이템 */
 export interface SelectUserTypeItem {
@@ -197,6 +203,27 @@ export type OrganizationParentHierarchyListResponse = ParentHierarchy[];
 /** @Response PinCode SMS 인증, E-Mail 인증(아이디 찾기용) */
 export interface FindLoginIdResponse {
   loginId: string;
+}
+
+/** @RequestBody 로그인 */
+export interface LoginBody {
+  loginId: string;
+  password: string;
+  fcmToken?: string;
+}
+
+/** @Response 로그인 */
+export interface LoginResponse {
+  id: number;
+  loginId: string;
+  localboxCreatorType: LocalboxCreatorType;
+  tokenType: 'BEARER';
+  jwt: string;
+  refreshToken: string;
+  localboxId: number;
+  myTownLatiY: number;
+  myTownLongiX: number;
+  roles: UserRoles[];
 }
 
 export interface OrganizationContent {
