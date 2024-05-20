@@ -1,7 +1,3 @@
-import { CommonResponse } from '@/types/common';
-
-import { ContentHashTag } from './contents';
-
 export type Villages = 'villages';
 
 export interface DisplayGpsSettingType {
@@ -34,13 +30,14 @@ export interface ContentForm {
   regFileDto: RegFileDtoType;
 }
 
+/** @DTO 콘텐츠 노출 지역 및 주변 지역 수 */
 export interface ContentDisplayAreaInfo {
   apiId: number;
   areaName: string;
   displayAreaCount: number;
 }
 
-/** @Dto 콘텐츠 수정 */
+/** @RequestBody 콘텐츠 수정 */
 export interface ContentEditBody {
   id: number;
   displayDeviceType: string;
@@ -52,24 +49,15 @@ export interface ContentEditBody {
   regFileDto: { fileType: string; multipartFile: File | string };
 }
 
-/** params */
-
-// 콘텐츠 노출 지역
+/** @RequestParams 콘텐츠 노출 지역 (반지름, 좌표) */
 export interface ContentDisplayAreaParams {
   radius: number;
   longiX: number;
   latiY: number;
 }
 
-/* response */
-export interface ContentDisplayAreaReponse extends CommonResponse {
-  result: ContentDisplayAreaInfo;
-}
-
-/**@Response 콘텐츠 수정 */
-export interface VillageNewsPutResponse extends CommonResponse {
-  result: {
-    id: number;
-    updateType: string;
-  };
+/** @Response 동네소식 수정 */
+export interface VillageNewsPutResponse {
+  id: number;
+  updateType: string;
 }
