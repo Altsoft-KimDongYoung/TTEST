@@ -293,3 +293,8 @@ export interface ContentCommentResponse extends PagingInfo {
 export interface ContentCountResponse extends CommonResponse {
   result: number;
 }
+
+/** @Response 콘텐츠 개수 조회 응답 값 */
+export interface ContentCountResponse extends CommonResponse {
+  result: number;
+}

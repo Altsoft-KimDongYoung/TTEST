@@ -23,11 +23,6 @@ export interface Pagenation {
   size?: number;
 }
 
-export interface Pagenation {
-  page?: number;
-  size?: number;
-}
-
 export interface CommonKeyLabel<T> {
   key: T;
   label: string;
