@@ -3,6 +3,7 @@ import { MultiPolygon } from './map';
 export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
 export type NonEmptyArray<T> = readonly [T, ...T[]];
+export type keyType = string | number | symbol;
 export type Many<T> = T | NonEmptyArray<T>;
 
 export type RequiredWith<T, K extends keyof T> = T & {
@@ -17,7 +18,7 @@ export interface Slug {
   slug: number;
 }
 
-export interface CommonRequest {
+export interface Pagenation {
   page?: number;
   size?: number;
 }
@@ -43,11 +44,6 @@ export type ApiResponseFailed = {
 };
 
 export type ApiResponse<T> = ApiResponseSuccess<T>;
-export interface CommonRequest {
-  page?: number;
-  size?: number;
-}
-
 export interface CommonResponse {
   message: string;
 }

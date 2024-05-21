@@ -1,202 +1,134 @@
-import type { CommonRequest, CommonResponse, PagingInfo } from '@/types/common';
+import type { Pagenation, PagingInfo } from '@/types/common';
 
-// Request
-export interface SignageDeviceDeleteParams {
+/** @RequestParams 승인된 사이니지 기기를 삭제하기 위한 파라미터 */
+export interface DeleteSignageDeviceParams {
   deviceId: number;
 }
 
-export interface SignageDeviceNamePatchBody {
+/** @RequestParams 사이니지 기기의 이름을 변경하기 위한 바디 */
+export interface PatchSignageDeviceNameBody {
   deviceId: number;
   deviceName: string;
 }
 
-export interface SignageGroupApprovalApplyHistoryParams extends CommonRequest {}
+/** @RequestParams 사용자가 그룹을 신청한 내역을 얻기위한 파라미터 */
+export interface SignageGroupApplyHistoryParams extends Pagenation {}
 
-export interface SignageDeviceApprovedDeviceParams extends CommonRequest {
+/** @RequestParams 승인된 사이니지 기기의 목록을 가져오기 위한 파라미터 */
+export interface ApprovedSignageDevicesParams extends Pagenation {
   groupRegYn: GroupRegYn;
   ratioType: DeviceRatio;
   powerOn: PowerOn;
 }
 
-export interface SignageGroupApprovalDeleteParams {
+/** @RequestParams 심사가 반려된 그룹의 신청을 취소하기 위한 파라미터 */
+export interface DeleteDecisionInProgressGroupParams {
   approvalId: number;
 }
 
-export interface SignageApprovedGroupParams extends CommonRequest {
+/** @RequestParams 결제된 사이니지 그룹의 목록을 받아오기 위한 파라미터 */
+export interface PaidSignageGroupParams extends Pagenation {
   signageGroupPlayStatus?: GroupPlayStatus;
 }
 
-export interface SignageGroupDetailParams extends CommonRequest {
+/** @RequestParams 그룹에 대한 정보를 얻기위한 파라미터 */
+export interface SignageGroupDetailParams extends Pagenation {
   groupId: number;
 }
 
-export interface SignageGroupPatchNameParams {
+/** @RequestParams 그룹의 이름을 수정하기 위한 파라미터 */
+export interface PatchSignageGroupNameParams {
   id: number;
   name: string;
 }
-export interface SignageGroupApprovalDetailParams {
+/** @RequestParams 심사가 반려된 그룹의 재신청을 할때 기존에 신청한 정보를 받아오기 위한 파라미터 */
+export interface DecisionInProgressGroupDetailParams {
   approvalId: string;
 }
 
-export interface SignageDeviceCanRegisterParams {
+/** @RequestParams 그룹 재신청할때 해당 그룹에 포함될 수 있는 디바이스들의 리스트를 기존 포함여부와 함께 조회하기 위해 사용되는 파라미터  */
+export interface UseReApplyDeviceCanRegisterParams extends Pagenation {
   groupId: number;
   ratioType: Exclude<DeviceRatio, null>;
-  page: number;
-  size: number;
 }
 
+/** @RequestParams 결제될 사이니지 그룹에 대한 정보를 얻기 위한 파라미터  */
 export type WillPayGroupDetailParams = string[];
 
-export interface ApplyPaymentGroupBody {
+/** @RequestBody 사이니지 그룹 결제하기 위한 바디  */
+export interface ApplyPayGroupBody {
   groupIds: string[];
 }
 
+/** @RequestParams 사이니지 그룹 삭제하기 위한 파라미터  */
 export interface SignageGroupDeleteParams {
   groupId: number;
 }
 
+/** @RequestParams 결제 취소될 그룹의 정보를 가져오기 위한 파라미터 */
 export interface CancelPayGroupDetailParams {
   groupId: string;
 }
 
-/** @Request 그룹 결제 취소에 사용되는 파라미터 */
+/** @RequestParams 그룹 결제 취소에 사용되는 파라미터 */
 export interface CancelPayGroupParams {
   groupId: string;
 }
 
-/** @Request fetchApprovedNotPayGroup의 파라미터 */
-export interface ApprovedNotPayGroupParams extends CommonRequest {}
+/** @RequestParams fetchApprovedNotPayGroup의 파라미터 */
+export interface NotPaidGroupParams extends Pagenation {}
 
-// Response
-export interface SignageDeviceSpecResponse extends CommonResponse {
-  result: {
-    content: SignageDeviceSpec[];
-  };
+/** @Response 사이니지 기기등록시 선택할 수 있는 디바이스의 정보 */
+export interface SignageDeviceSpecResponse {
+  content: SignageDeviceSpec[];
 }
 
-export interface SignageDeviceCheckNameResponse extends CommonResponse {
-  result: boolean;
+/** @Response 승인된 사이니지 기기의 목록 */
+export interface ApprovedSignageDevicesResponse extends PagingInfo {
+  content: ApprovedSignageDevice[];
 }
 
-export interface SignageDeviceCheckSerialNumResponse extends CommonResponse {
-  result: boolean;
+/** @Response 사용자가 그룹을 신청한 내역 */
+export interface SignageGroupApplyHistoryResponse extends PagingInfo {
+  content: SignageGroupHistory[];
 }
 
-export interface SignageDeviceApprovalResponse extends CommonResponse {
-  result: boolean;
+/** @Response 결제된 사이니지 그룹의 목록 */
+export interface PaidSignageGroupResponse extends PagingInfo {
+  content: PaidSignageGroup[];
 }
 
-export interface SignageDeviceApprovedDeviceResponse extends CommonResponse {
-  result: {
-    content: ApprovedSignageDevice[];
-  } & PagingInfo;
+/** @Response 그룹에 대한 정보 */
+export interface SignageGroupDetailResponse extends PagingInfo {
+  content: SignageGroupDetail[];
 }
 
-export interface SignageDeviceDeleteResponse extends CommonResponse {
-  result: boolean;
+/** @Response 그룹 재신청할때 해당 그룹에 포함될 수 있는 디바이스들의 리스트를 기존 포함여부 */
+export interface UseReApplyDeviceCanRegisterResponse extends PagingInfo {
+  content: DeviceCanRegister[];
 }
 
-export interface SignageDeviceNamePatchResponse extends CommonResponse {
-  result: boolean;
+/** @Response 결제될 사이니지 그룹에 대한 정보 */
+export interface WillPayGroupDetailResponse {
+  signageGroupElementDtos: PaySignageGroup[];
+  deviceSumCount: number;
+  nextPaymentDateTime: string;
+  paymentAmount: number;
 }
 
-export interface SignageDeviceApprovalLocalboxDisplayCanTypeResponse
-  extends CommonResponse {
-  result: DisplayCanType;
+/** @Response 결제 취소될 그룹의 정보 */
+export interface CancelPayGroupDetailResponse {
+  signageGroupElementDto: PaySignageGroup;
+  deviceSumCount: number;
+  serviceEndTime: string;
 }
 
-export interface SignageGroupApprovalResponse extends CommonResponse {
-  result: boolean;
+/** @Response 승인이 되었지만 결제는 되지 않은 그룹 데이터 */
+export interface NotPaidGroupResponse extends PagingInfo {
+  content: NotPaidGroup[];
 }
 
-export interface SignageGroupApprovalApplyHistoryResponse
-  extends CommonResponse {
-  result: {
-    content: SignageGroupHistory[];
-  } & PagingInfo;
-}
-
-export interface SignageGroupCheckNameResponse extends CommonResponse {
-  result: boolean;
-}
-
-export interface SignageGroupApprovedLocalboxDisplayCanTypeResponse
-  extends CommonResponse {
-  result: GroupDisplayCanType;
-}
-
-export interface SignageGroupApprovalDeleteResponse extends CommonResponse {
-  result: boolean;
-}
-
-export interface SignageApprovedGroupResponse extends CommonResponse {
-  result: {
-    content: ApprovedSignageGroup[];
-  } & PagingInfo;
-}
-
-export interface SignageGroupDetailResponse extends CommonResponse {
-  result: {
-    content: SignageGroupDetail[];
-  } & PagingInfo;
-}
-
-export interface SignageGroupNamePatchResponse extends CommonResponse {
-  result: boolean;
-}
-
-export interface SignageGroupApprovalDetailResponse extends CommonResponse {
-  result: SignageGroupApprovalDetail;
-}
-
-export interface SignageGroupApprovalDetailResponse extends CommonResponse {
-  result: SignageGroupApprovalDetail;
-}
-
-export interface SignageDeviceCanRegisterResponse extends CommonResponse {
-  result: {
-    content: DeviceCanRegister[];
-  } & PagingInfo;
-}
-
-export interface WillPayGroupDetailResponse extends CommonResponse {
-  result: {
-    signageGroupElementDtos: PaySignageGroup[];
-    deviceSumCount: number;
-    nextPaymentDateTime: string;
-    paymentAmount: number;
-  };
-}
-
-export interface ApplyPaymentGroupResponse extends CommonResponse {
-  result: boolean;
-}
-
-export interface SignageGroupDeleteResponse extends CommonResponse {
-  result: boolean;
-}
-
-export interface CancelPayGroupDetailResponse extends CommonResponse {
-  result: {
-    signageGroupElementDto: PaySignageGroup;
-    deviceSumCount: number;
-    serviceEndTime: string;
-  };
-}
-
-/** @Response 그룹 결제 취소에 응답 */
-export interface CancelPayGroupResponse extends CommonResponse {
-  result: boolean;
-}
-
-/** @Response fetchApprovedNotPayGroup의 응답 */
-export interface ApprovedNotPayGroupResponse extends CommonResponse {
-  result: {
-    content: ApprovedNotPayGroup[];
-  } & PagingInfo;
-}
-
-// DTO
+/** @DTO 사이니지 기기등록시 선택할 수 있는 디바이스 */
 export interface SignageDeviceSpec {
   id: number;
   productName: string;
@@ -205,6 +137,7 @@ export interface SignageDeviceSpec {
   manufacturer: string;
 }
 
+/** @DTO 승인된 사이니지 디바이스 정보 */
 export interface ApprovedSignageDevice {
   deviceId: number;
   deviceRatioType: DeviceRatio;
@@ -213,6 +146,7 @@ export interface ApprovedSignageDevice {
   deviceName: string;
 }
 
+/** @DTO 사용자의 그룹 신청 내역 */
 export interface SignageGroupHistory {
   groupId: number;
   approvalId: number;
@@ -225,7 +159,8 @@ export interface SignageGroupHistory {
   explanation?: string;
 }
 
-export interface ApprovedSignageGroup {
+/** @DTO 결제된 사이니지 그룹 */
+export interface PaidSignageGroup {
   groupId: number;
   approvalId: number;
   groupRatioType: Exclude<DeviceRatio, null>;
@@ -239,12 +174,15 @@ export interface ApprovedSignageGroup {
   paymentStatus?: PaymentStatus;
 }
 
+/** @DTO 사이니지 프로젝트 데이터 */
 export interface SignageProjectElement {
   signageProjectId: number;
   signageProjectName: string;
   defaultProjectYn: boolean;
   projectPlayEndTime: string;
 }
+
+/** @DTO 그룹 정보 */
 export interface SignageGroupDetail {
   deviceId: number;
   groupId: number;
@@ -254,7 +192,8 @@ export interface SignageGroupDetail {
   deviceName: string;
 }
 
-export interface SignageGroupApprovalDetail {
+/** @DTO 심사가 반려된 그룹의 재신청을 할때 기존에 신청한 정보 */
+export interface DecisionInProgressGroupDetail {
   groupId: number;
   approvalId: number;
   status: SignageGroupHistoryStatus;
@@ -264,22 +203,7 @@ export interface SignageGroupApprovalDetail {
   fileDetailDtoList: ImageFileDetail[];
 }
 
-export interface ImageFileDetail {
-  fileId: number;
-  fileType: string;
-  fileName: string;
-  url: string;
-}
-export interface SignageGroupApprovalDetail {
-  groupId: number;
-  approvalId: number;
-  status: SignageGroupHistoryStatus;
-  groupName: string;
-  ratioType: Exclude<DeviceRatio, null>;
-  deviceIdList: number[];
-  fileDetailDtoList: ImageFileDetail[];
-}
-
+/** @DTO 심사가 반려된 그룹의 재신청을 할때 기존에 신청한 정보 중 이미지 */
 export interface ImageFileDetail {
   fileId: number;
   fileType: string;
@@ -287,6 +211,7 @@ export interface ImageFileDetail {
   url: string;
 }
 
+/** @DTO 그룹 재신청할때 해당 그룹에 포함될 수 있는 디바이스 정보 */
 export interface DeviceCanRegister {
   deviceId: number;
   deviceName: string;
@@ -294,20 +219,7 @@ export interface DeviceCanRegister {
   isInGroup: boolean;
 }
 
-export interface DeviceCanRegister {
-  deviceId: number;
-  deviceName: string;
-  ratioType: Exclude<DeviceRatio, null>;
-  isInGroup: boolean;
-}
-
-export interface DeviceCanRegister {
-  deviceId: number;
-  deviceName: string;
-  ratioType: Exclude<DeviceRatio, null>;
-  isInGroup: boolean;
-}
-
+/** @DTO 결제된 그룹의 정보 */
 export interface PaySignageGroup {
   signageGroupId: number;
   signageGroupRatioType: Exclude<DeviceRatio, null>;
@@ -316,6 +228,7 @@ export interface PaySignageGroup {
   playYn: boolean;
 }
 
+/** @DTO 결제 영수증 데이터 */
 export interface WillPayReciptInfo {
   deviceSumCount: number;
   nextPaymentDateTime: string;
@@ -323,7 +236,7 @@ export interface WillPayReciptInfo {
 }
 
 /** @DTO 승인되었지만 결제는 안된 그룹 */
-export interface ApprovedNotPayGroup {
+export interface NotPaidGroup {
   groupId: number;
   approvalId: number;
   signageGroupApprovalStatus: SignageGroupHistoryStatus;
@@ -333,45 +246,85 @@ export interface ApprovedNotPayGroup {
   approvalUpdateDt: string;
 }
 
+/** @TYPE 사이니지 기기 비율 타입 */
 export type DeviceRatio = 'HOR_16_9' | 'VER_9_16' | null;
 
+/** @TYPE 사이니지 기기 상태 */
 export type SignageDevicePlayStatus = 'PLAY_OFF' | 'PLAY_ON' | 'POWER_OFF';
 
+/** @TYPE 사이니지 그룹인지 아닌지 명시하기 위한 불리언 타입 */
 export type GroupRegYn = boolean | null;
 
+/** @TYPE 사이니지 기기의 상태에 따라 필터조회를 하기 위한 불리언 타입 */
 export type PowerOn = boolean | null;
 
-export type DisplayCanType =
+/**
+ * @TYPE 사이니지 기기 보유 상태에 따라 페이지를 분기처리하는 타입
+ * NOT_EXISTENT_DEVICE("사이니지 디바이스가 등록되지 않음"),
+ * EXISTENT_APPROVAL_CONFIRM_ING_DEVICE("심사중인 디바이스 신청이 있음"),
+ * EXISTENT_DEVICE("사이니지 디바이스 존재하고 모든 신청이 승인됨"),
+ */
+export type RenderTypeDevicePage =
   | 'EXISTENT_DEVICE'
   | 'EXISTENT_APPROVAL_CONFIRM_ING_DEVICE'
   | 'NOT_EXISTENT_DEVICE';
 
+/**
+ * @TYPE 사이니지 그룹의 신청 상태 타입
+ * REQUEST_STATUS(0, "신청 상태"),
+ * CONFIRM_ING_STATUS(1, "검토중 상태"),
+ * APPROVAL_STATUS(2, "심사 승인 상태"),
+ * NOT_APPROVAL_STATUS(3, "심사 거절 상태")
+ */
 export type SignageGroupHistoryStatus =
   | 'REQUEST_STATUS'
   | 'CONFIRM_ING_STATUS'
   | 'APPROVAL_STATUS'
   | 'NOT_APPROVAL_STATUS';
 
-export type GroupDisplayCanType =
+/**
+ * @TYPE 사용자의 현재 상태에 따라 그룹탭을 분기처리하기 위한 타입
+ * NOT_EXISTENT_PAYMENT("결제 정보가 없음"),
+ * NOT_EXISTENT_GROUP("사이니지 그룹이 없음"),
+ * NOT_EXISTENT_APPROVED_GROUP("승인된 사이니지 그룹이 없음"),
+ * NOT_EXISTENT_PAID_GROUP("결제된 사이니지 그룹이 없음"),
+ * EXISTENT_GROUP("사이니지 그룹 존재"),
+ */
+export type RenderTypeGroupPage =
   | 'NOT_EXISTENT_GROUP'
   | 'NOT_EXISTENT_APPROVED_GROUP'
   | 'NOT_EXISTENT_PAYMENT'
   | 'EXISTENT_GROUP'
   | 'NOT_EXISTENT_PAID_GROUP';
 
+/**
+ * @TYPE 그룹 심사 반려가 된 사유 타입
+ * ET_CETERA(0, "기타 등등"),
+ * WRONG_IMG_UPLOAD(1, "잘못된 사진이 업로드 되어있어요."),
+ * NOT_INSTALLED_SIGNAGE_GROUP(2, "사이니지 그룹으로 설치가 안되어있어요.")
+ */
 export type GroupApplyRejectType =
   | 'ET_CETERA'
   | 'WRONG_IMG_UPLOAD'
   | 'NOT_INSTALLED_SIGNAGE_GROUP';
 
-export interface SignageDeviceDisplayCan {
-  signageDeviceDisplayCanType: DisplayCanType;
-}
+/**
+ * @TYPE 사이니지 그룹의 결제 상태 타입
+ * UNPAID_STATUS(0, "결제 안된 상태"),
+ * PAYMENT_STATUS(1, "결제 상태"),
+ * PAYMENT_END_WAITING_STATUS(2, "결제 종료 대기 상태")
+ */
 export type PaymentStatus =
   | 'UNPAID_STATUS'
   | 'PAYMENT_STATUS'
   | 'PAYMENT_END_WAITING_STATUS';
 
+/**
+ * @TYPE 사이니지 그룹 전원 상태 타입
+ * ALL_DEVICE_POWER_OFF("그룹 내 모든 디바이스 전원 OFF"),
+ * ALL_DEVICE_POWER_ON("그룹 내 모든 디바이스 전원 ON"),
+ * SOME_DEVICE_POWER_OFF("그룹 내 몇 개의 디바이스 전원 OFF")
+ */
 export type GroupPlayStatus =
   | 'ALL_DEVICE_POWER_OFF'
   | 'ALL_DEVICE_POWER_ON'

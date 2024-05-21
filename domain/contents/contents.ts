@@ -288,3 +288,8 @@ export interface ContentTempResponse extends PagingInfo {
 export interface ContentCommentResponse extends PagingInfo {
   content: Comment[];
 }
+
+/** @Response 콘텐츠 개수 조회 응답 값 */
+export interface ContentCountResponse extends CommonResponse {
+  result: number;
+}

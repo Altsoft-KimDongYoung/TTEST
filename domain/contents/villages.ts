@@ -18,7 +18,6 @@ export interface RegisterFormType {
   hashTags: string[];
   regFileDto: RegFileDtoType;
 }
-
 // 콘텐츠 등록 form
 export interface ContentForm {
   displayDeviceType: string;
