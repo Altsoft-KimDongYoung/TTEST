@@ -91,6 +91,32 @@ export interface PostingContent {
   signageDisplayCount: number;
 }
 
+/** @DTO 사이니지 콘텐츠 데이터 */
+export interface ContentSignageDto {
+  ratioType: DeviceRatio;
+  titleDto: {
+    text: string;
+    fontSize: string;
+    fontColor: string;
+    horizontalAlign: string;
+    verticalAlign: string;
+  };
+  summaryDto: {
+    text: string;
+    fontSize: string;
+    fontColor: string;
+    horizontalAlign: string;
+    verticalAlign: string;
+  };
+}
+
+/** @DTO 사이니지 콘텐츠 상세 데이터 dto */
+export interface ContentSignageDetailDto extends ContentSignageDto {
+  contentSignageId: number;
+  originalRepresentFileName: string;
+  originalRepresentFileUrl: string;
+}
+
 /** @DTO 콘텐츠 목록 */
 export interface ContentListDto {
   contentId: number;
@@ -127,6 +153,7 @@ export interface ContentDetailDto {
   contentNotLikeYn: boolean;
   contentBookmarkYn: boolean;
   contentType: string;
+  displayDeviceType?: ContentTempDisplayDeviceType;
   contentTitle: string;
   contentBody: string;
   contentRepresentFileType: string;
@@ -136,6 +163,8 @@ export interface ContentDetailDto {
   regDt: string;
   localboxElementDto: LocalboxMyElement;
   postingContentDto?: PostingContent;
+  contentSignageDto?: ContentSignageDetailDto;
+  shareOrganizationIds?: number[];
   displayInfo: DisplayInfoDto;
 }
 
@@ -164,23 +193,7 @@ export interface ContentTempItem {
   hashTags: string[];
   shareOrganizationIds?: number[];
   summary: string;
-  contentSignageRegDto?: {
-    ratioType: DeviceRatio;
-    titleDto: {
-      text: string;
-      fontSize: string;
-      fontColor: string;
-      horizontalAlign: string;
-      verticalAlign: string;
-    };
-    summaryDto: {
-      text: string;
-      fontSize: string;
-      fontColor: string;
-      horizontalAlign: string;
-      verticalAlign: string;
-    };
-  };
+  contentSignageRegDto?: ContentSignageDto;
 }
 
 /** @DTO 임시저장 목록 조회 시 각 content 타입 */
