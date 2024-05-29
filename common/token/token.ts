@@ -1,4 +1,4 @@
-/** @RequestBody 토큰 재발급 */
+/** @Request 토큰 재발급 */
 export interface RenewRefreshTokenBody {
   userId: number;
   refreshToken: string;

@@ -1,4 +1,4 @@
-import { MultiPolygon } from './map';
+import { MultiPolygon } from './map/map';
 
 export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
