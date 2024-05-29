@@ -1,5 +1,3 @@
-import { MultiPolygon } from './map/map';
-
 export type KeyOf<T> = Extract<keyof T, string>;
 export type ValueOf<T> = T[KeyOf<T>];
 export type NonEmptyArray<T> = readonly [T, ...T[]];
@@ -14,6 +12,11 @@ export type IndexSignature<T extends string | number | symbol, U> = {
   [key in T]: U;
 };
 
+export interface KeyLabel<T, V extends string = string> {
+  key: T;
+  label: V;
+}
+
 export interface Slug {
   slug: number;
 }
@@ -21,11 +24,6 @@ export interface Slug {
 export interface Pagenation {
   page?: number;
   size?: number;
-}
-
-export interface CommonKeyLabel<T> {
-  key: T;
-  label: string;
 }
 
 export type ApiResponseSuccess<T> = {
@@ -69,18 +67,4 @@ export interface PagingInfo {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
-}
-
-export interface AreaPointMyTownParams {
-  latiY: string | number;
-  longiX: string | number;
-}
-
-export interface AreaPointMyTownResponse {
-  apiId: number;
-  apiType: string;
-  apiDepth: number;
-  areaName: string;
-  areaFullName: string;
-  multiPolygonStr: MultiPolygon;
 }

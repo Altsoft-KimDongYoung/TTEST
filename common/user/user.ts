@@ -5,7 +5,7 @@ import {
   USER_TYPE_LABEL,
 } from '@/constants/user';
 
-import { ValueOf } from './common';
+import { ValueOf } from '../common';
 
 export type UserType = ValueOf<typeof USER_TYPE>;
 export type UserTypeLabel = ValueOf<typeof USER_TYPE_LABEL>;
