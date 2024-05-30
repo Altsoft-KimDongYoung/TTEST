@@ -1,52 +1,20 @@
-import { LocalboxCreatorType } from '@/types/common';
+import { IndexSignature, LocalboxCreatorType } from '@/types/common';
 
-export interface FileInto {
+/** @MY 페이지 이동시 pathname, step query에 대한 타입 */
+export interface WithQueryStep {
+  pathname: string;
+  query: IndexSignature<'step', string>;
+}
+
+export interface FileInfo {
   originalName: string;
   url: string;
 }
 
-/** @Response 마이 프로필 상세 조회 */
-export type FetchMyProfileResponse<T = MyProfileOfMemberDto> = T;
-
-/** @Response 마이 프로필 상제 조회 (일반 회원 DTO) */
-export interface MyProfileOfMemberDto {
-  localboxCreatorType: LocalboxCreatorType;
-  localboxName: string;
-  localboxProfileImgUrl: string;
+/** @MY 마이프로필 - 회원 공통 폼 */
+export interface CommonProfileForm {
   loginId: string;
-  mobile: string;
-  userId: number;
-  profileImg: File | null;
-}
-
-/** @Request pinCode SMS 전송 (휴대폰 번호 변경용) */
-export interface FetchUserSendSMSChangeMobileParams {
-  userName: string;
-  mobile: string;
-}
-
-/** @Request pinCode SMS 인증 (휴대폰 번호 변경용) */
-export interface FetchUserConfirmSMSChangeMobileParams {
-  userName: string;
-  mobile: string;
-  pinCode: string;
-}
-
-/** @Request 사용자 비밀번호 확인  */
-export interface FetchCheckPasswordParams {
-  password: string;
-}
-
-/** @Request 사용자 비밀번호 변경 */
-export interface PutPasswordBody {
-  password: string;
-  newPassword: string;
-}
-
-/** @Form 마이프로필 - 일반회원 */
-export interface MyProfileOfMemberForm {
-  loginId: string;
-  profileImg: File | null;
+  profileImg?: File | null;
   localboxProfileImgUrl?: string;
   nickname: string;
   name: string;
@@ -55,4 +23,96 @@ export interface MyProfileOfMemberForm {
   currentPassword: string;
   newPassword: string;
   newPasswordConfirm: string;
+}
+
+/** @MY 마이프로필 - 일반 회원 폼 */
+export interface MemberProfileForm extends CommonProfileForm {}
+
+/** @MY 마이프로필 - 기업 회원 폼 */
+export interface BusinessMemberProfileForm extends CommonProfileForm {
+  businessLicenseFileInfo: FileInfo;
+  businessName: string;
+  businessNumber: string;
+  businessOpenDt: string;
+  ownerName: string;
+  serviceName?: string;
+  homepageUrl?: string;
+  newEmail: string;
+  currentEmail: string;
+}
+
+/** @Response 마이 프로필 상세 조회 */
+export type FetchMyProfileResponse<
+  T = MemberProfileDTO | BusinessMemberProfileDTO
+> = T;
+
+/** @DTO 마이프로필 상세 조회 (회원 공통 DTO) */
+export interface CommonProfileDTO {
+  profileImg?: File | null;
+  localboxCreatorType: LocalboxCreatorType;
+  localboxName: string;
+  localboxProfileImgUrl: string;
+  loginId: string;
+  mobile: string;
+  userId: number;
+}
+
+/** @DTO 마이프로필 상세 조회 (일반 회원 DTO) */
+export interface MemberProfileDTO extends CommonProfileDTO {}
+
+/** @DTO 마이프로필 상세 조회 (기업 회원 DTO) */
+export interface BusinessMemberProfileDTO extends CommonProfileDTO {
+  businessLicenseFileInfo: FileInfo;
+  licenseFile: File | null;
+  businessName: string;
+  businessNumber: string;
+  businessOpenDt: string;
+  email: string;
+  ownerName: string;
+  serviceName?: string;
+  homepageUrl?: string;
+}
+
+/** @DTO 마이프로필 상세 조회 (아파트 회원 DTO) */
+export interface ApartmentMemberProfileDTO extends CommonProfileDTO {}
+
+/** @DTO 마이프로필 상세 조회 (관공서 회원 DTO) */
+export interface GVMT_MemberProfileDTO extends CommonProfileDTO {}
+
+/** @DTO 마이프로필 상세 조회 (지역신문사 회원 ) */
+export interface LocalNewspaperMemberProfileDto extends CommonProfileDTO {}
+
+/** @RequestParams pinCode SMS 전송 (휴대폰 번호 변경용) */
+export interface FetchUserSendSMSChangeMobileParams {
+  userName: string;
+  mobile: string;
+}
+
+/** @RequestParams pinCode SMS 인증 (휴대폰 번호 변경용) */
+export interface FetchUserConfirmSMSChangeMobileParams {
+  userName: string;
+  mobile: string;
+  pinCode: string;
+}
+
+/** @RequestParams PinCode Email 전송 (이메일 변경용) */
+export interface FetchUserSendMailChangeEmailParams {
+  email: string;
+}
+
+/** @RequestParams PinCode Email 인증 (이메일 변경용) */
+export interface FetchUserConfirmEmailChangeEmailParams {
+  email: string;
+  pinCode: string;
+}
+
+/** @RequestParams 사용자 비밀번호 확인  */
+export interface FetchCheckPasswordParams {
+  password: string;
+}
+
+/** @RequestParams 사용자 비밀번호 변경 */
+export interface PutPasswordBody {
+  password: string;
+  newPassword: string;
 }

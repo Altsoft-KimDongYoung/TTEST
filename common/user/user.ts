@@ -1,5 +1,6 @@
 import {
   LOCALBOX_CREATOR_TYPE,
+  USER,
   USER_ROLES,
   USER_TYPE,
   USER_TYPE_LABEL,
@@ -7,6 +8,7 @@ import {
 
 import { ValueOf } from '../common';
 
+export type User = ValueOf<typeof USER>;
 export type UserType = ValueOf<typeof USER_TYPE>;
 export type UserTypeLabel = ValueOf<typeof USER_TYPE_LABEL>;
 export type LocalboxCreatorType = ValueOf<typeof LOCALBOX_CREATOR_TYPE>;
