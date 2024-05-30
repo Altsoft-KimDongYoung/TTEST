@@ -59,6 +59,22 @@ export interface GVMTMemberProfileForm extends CommonProfileForm {
   currentEmail: string;
 }
 
+/** @MY 마이프로필 - 지역신문사 회원 폼 */
+export interface LocalNewspaperMemberProfileForm extends CommonProfileForm {
+  businessLicenseFileInfo: FileInfo;
+  employmentFileInfo: FileInfo;
+  businessName: string;
+  businessNumber: string;
+  businessOpenDt: string;
+  organizationName: string;
+  ownerName: string;
+  serviceName: string;
+  homepageUrl?: string;
+  newEmail: string;
+  currentEmail: string;
+  newspaperRegNumber: string;
+}
+
 /** @Response 마이 프로필 상세 조회 */
 export type FetchMyProfileResponse<
   T =
@@ -66,6 +82,7 @@ export type FetchMyProfileResponse<
     | BusinessMemberProfileDTO
     | ApartmentMemberProfileDTO
     | GVMTMemberProfileDTO
+    | LocalNewspaperMemberProfileDTO
 > = T;
 
 /** @DTO 마이프로필 상세 조회 (회원 공통 DTO) */
@@ -114,7 +131,21 @@ export interface GVMTMemberProfileDTO extends CommonProfileDTO {
 }
 
 /** @DTO 마이프로필 상세 조회 (지역신문사 회원 ) */
-export interface LocalNewspaperMemberProfileDto extends CommonProfileDTO {}
+export interface LocalNewspaperMemberProfileDTO extends CommonProfileDTO {
+  businessLicenseFileInfo: FileInfo;
+  licenseFile: File | null;
+  employmentFileInfo: FileInfo;
+  employmentFile: File | null;
+  businessName: string;
+  businessNumber: string;
+  businessOpenDt: string;
+  organizationName: string;
+  ownerName: string;
+  serviceName: string;
+  email: string;
+  newspaperRegNumber: string;
+  homepageUrl?: string;
+}
 
 /** @RequestParams pinCode SMS 전송 (휴대폰 번호 변경용) */
 export interface FetchUserSendSMSChangeMobileParams {
