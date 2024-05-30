@@ -41,9 +41,18 @@ export interface BusinessMemberProfileForm extends CommonProfileForm {
   currentEmail: string;
 }
 
+/** @MY 마이프로필 - 아파트 회원 폼 */
+export interface ApartmentMemberProfileForm extends CommonProfileForm {
+  employmentFileInfo: FileInfo;
+  organizationName: string;
+  ownerName: string;
+  newEmail: string;
+  currentEmail: string;
+}
+
 /** @Response 마이 프로필 상세 조회 */
 export type FetchMyProfileResponse<
-  T = MemberProfileDTO | BusinessMemberProfileDTO
+  T = MemberProfileDTO | BusinessMemberProfileDTO | ApartmentMemberProfileDTO
 > = T;
 
 /** @DTO 마이프로필 상세 조회 (회원 공통 DTO) */
@@ -74,7 +83,13 @@ export interface BusinessMemberProfileDTO extends CommonProfileDTO {
 }
 
 /** @DTO 마이프로필 상세 조회 (아파트 회원 DTO) */
-export interface ApartmentMemberProfileDTO extends CommonProfileDTO {}
+export interface ApartmentMemberProfileDTO extends CommonProfileDTO {
+  employmentFileInfo: FileInfo;
+  licenseFile: File | null;
+  organizationName: string;
+  email: string;
+  ownerName: string;
+}
 
 /** @DTO 마이프로필 상세 조회 (관공서 회원 DTO) */
 export interface GVMT_MemberProfileDTO extends CommonProfileDTO {}
