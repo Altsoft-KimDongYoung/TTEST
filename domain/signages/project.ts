@@ -77,6 +77,7 @@ export interface Project {
   totalDisplayTime: number;
   reservationCount: number;
   isDefaultProject: boolean;
+  contentCount: number;
 }
 
 /** @DTO 사이니지 프로젝트에 등록할 수 있는 컨텐츠 */
@@ -179,4 +180,11 @@ export interface ProjectEditForm {
   projectName: string;
   contentId: (number | undefined)[];
   displayTime: number;
+}
+
+/** @TYPE 프로젝트 예약시에 Form 타입 */
+export interface ReserveRegisterForm {
+  projectId: number;
+  reserveStartDt: string;
+  reserveEndDt: string;
 }
