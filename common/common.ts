@@ -68,3 +68,7 @@ export interface PagingInfo {
   first: boolean;
   empty: boolean;
 }
+
+/** @TYPE 사이니지 기기 비율 타입 */
+export type DeviceRatio = 'HOR_16_9' | 'VER_9_16';
+export type NullableDeviceRatio = DeviceRatio | null;

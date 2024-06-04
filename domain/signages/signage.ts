@@ -1,4 +1,5 @@
 import type { Pagenation, PagingInfo } from '@/types/common';
+import { DeviceRatio, NullableDeviceRatio } from '@/types/common';
 
 /** @RequestParams 승인된 사이니지 기기를 삭제하기 위한 파라미터 */
 export interface DeleteSignageDeviceParams {
@@ -17,7 +18,7 @@ export interface SignageGroupApplyHistoryParams extends Pagenation {}
 /** @RequestParams 승인된 사이니지 기기의 목록을 가져오기 위한 파라미터 */
 export interface ApprovedSignageDevicesParams extends Pagenation {
   groupRegYn: GroupRegYn;
-  ratioType: DeviceRatio;
+  ratioType: NullableDeviceRatio;
   powerOn: PowerOn;
 }
 
@@ -49,7 +50,7 @@ export interface DecisionInProgressGroupDetailParams {
 /** @RequestParams 그룹 재신청할때 해당 그룹에 포함될 수 있는 디바이스들의 리스트를 기존 포함여부와 함께 조회하기 위해 사용되는 파라미터  */
 export interface UseReApplyDeviceCanRegisterParams extends Pagenation {
   groupId: number;
-  ratioType: Exclude<DeviceRatio, null>;
+  ratioType: DeviceRatio;
 }
 
 /** @RequestParams 결제될 사이니지 그룹에 대한 정보를 얻기 위한 파라미터  */
@@ -77,6 +78,17 @@ export interface CancelPayGroupParams {
 
 /** @RequestParams fetchApprovedNotPayGroup의 파라미터 */
 export interface NotPaidGroupParams extends Pagenation {}
+
+/** @RequestParams 사이니지 그룹의 상세정보를 가져오기위해 사용되는 파라미터 */
+export interface SignageGroupDetailInfoParams {
+  groupId: number;
+}
+
+/** @RequestBody 사이니지 그룹의 기본 프로젝트를 변경하기 위한 바디 */
+export interface PatchGroupDefaultProjectBody {
+  groupId: number;
+  projectId: number;
+}
 
 /** @Response 사이니지 기기등록시 선택할 수 있는 디바이스의 정보 */
 export interface SignageDeviceSpecResponse {
@@ -128,6 +140,24 @@ export interface NotPaidGroupResponse extends PagingInfo {
   content: NotPaidGroup[];
 }
 
+/** @Response 사이니지 그룹 상세 정보 */
+export interface SignageGroupDetailInfoResponse {
+  groupId: number;
+  ratioType: DeviceRatio;
+  groupName: string;
+  deviceSumCount: number;
+  deviceHealthOffCount: number;
+  signageGroupPlayStatus: GroupPlayStatus;
+  paymentStatus: PaymentStatus;
+  deviceInfoList: DeviceInfo[];
+  defaultProjectDetailDto: SignageDefaultProject;
+  firstPaymentDt?: string;
+  nextPaymentDt?: string;
+  reservationMaxDt?: string;
+  paymentCancellationDt?: string;
+  updateDt: string;
+}
+
 /** @DTO 사이니지 기기등록시 선택할 수 있는 디바이스 */
 export interface SignageDeviceSpec {
   id: number;
@@ -140,7 +170,7 @@ export interface SignageDeviceSpec {
 /** @DTO 승인된 사이니지 디바이스 정보 */
 export interface ApprovedSignageDevice {
   deviceId: number;
-  deviceRatioType: DeviceRatio;
+  deviceRatioType: NullableDeviceRatio;
   signageDevicePlayStatus: SignageDevicePlayStatus;
   deviceHealthYn: string;
   deviceName: string;
@@ -152,7 +182,7 @@ export interface SignageGroupHistory {
   approvalId: number;
   deviceSumCount: number;
   signageGroupApprovalStatus: SignageGroupHistoryStatus;
-  groupRatioType: Exclude<DeviceRatio, null>;
+  groupRatioType: DeviceRatio;
   groupName: string;
   approvalUpdateDt: string;
   rejectType?: GroupApplyRejectType;
@@ -163,7 +193,7 @@ export interface SignageGroupHistory {
 export interface PaidSignageGroup {
   groupId: number;
   approvalId: number;
-  groupRatioType: Exclude<DeviceRatio, null>;
+  groupRatioType: DeviceRatio;
   groupName: string;
   deviceSumCount: number;
   deviceHealthOffCount: number;
@@ -172,6 +202,9 @@ export interface PaidSignageGroup {
   serviceEndTime?: string;
   signageProjectElementDto?: SignageProjectElement;
   paymentStatus?: PaymentStatus;
+  signageGroupFirstPaymentDt?: string;
+  signageGroupPaymentCancellationDt?: string;
+  signageGroupNextPaymentDt?: string;
 }
 
 /** @DTO 사이니지 프로젝트 데이터 */
@@ -182,11 +215,21 @@ export interface SignageProjectElement {
   projectPlayEndTime: string;
 }
 
+/** @DTO 사이니지 기본 프로젝트 데이터 */
+export interface SignageDefaultProject {
+  projectId: number;
+  projectName: string;
+  projectRatioType: DeviceRatio;
+  defaultProjectYn: boolean;
+  signageReserveStartDt?: string;
+  signageReserveEndDt?: string;
+}
+
 /** @DTO 그룹 정보 */
 export interface SignageGroupDetail {
   deviceId: number;
   groupId: number;
-  deviceRatioType: DeviceRatio;
+  deviceRatioType: NullableDeviceRatio;
   signageDevicePlayStatus: SignageDevicePlayStatus;
   deviceHealthYn: string;
   deviceName: string;
@@ -198,7 +241,7 @@ export interface DecisionInProgressGroupDetail {
   approvalId: number;
   status: SignageGroupHistoryStatus;
   groupName: string;
-  ratioType: Exclude<DeviceRatio, null>;
+  ratioType: DeviceRatio;
   deviceIdList: number[];
   fileDetailDtoList: ImageFileDetail[];
 }
@@ -215,14 +258,14 @@ export interface ImageFileDetail {
 export interface DeviceCanRegister {
   deviceId: number;
   deviceName: string;
-  ratioType: Exclude<DeviceRatio, null>;
+  ratioType: DeviceRatio;
   isInGroup: boolean;
 }
 
 /** @DTO 결제된 그룹의 정보 */
 export interface PaySignageGroup {
   signageGroupId: number;
-  signageGroupRatioType: Exclude<DeviceRatio, null>;
+  signageGroupRatioType: DeviceRatio;
   signageGroupName: string;
   deviceSumCount: number;
   playYn: boolean;
@@ -240,14 +283,21 @@ export interface NotPaidGroup {
   groupId: number;
   approvalId: number;
   signageGroupApprovalStatus: SignageGroupHistoryStatus;
-  groupRatioType: Exclude<DeviceRatio, null>;
+  groupRatioType: DeviceRatio;
   groupName: string;
   deviceSumCount: number;
   approvalUpdateDt: string;
 }
 
-/** @TYPE 사이니지 기기 비율 타입 */
-export type DeviceRatio = 'HOR_16_9' | 'VER_9_16' | null;
+/** @DTO 그룹에 속한 디바이스 정보 */
+export interface DeviceInfo {
+  deviceId: number;
+  ratioType: DeviceRatio;
+  deviceName: string;
+  serialNum: SignageDevicePlayStatus;
+  playStatus: string;
+  updateDt: string;
+}
 
 /** @TYPE 사이니지 기기 상태 */
 export type SignageDevicePlayStatus = 'PLAY_OFF' | 'PLAY_ON' | 'POWER_OFF';

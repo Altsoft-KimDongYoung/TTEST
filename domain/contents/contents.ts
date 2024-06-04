@@ -1,12 +1,12 @@
 import {
   CommonResponse,
   LocalboxCreatorType,
+  NullableDeviceRatio,
   Pagenation,
   PagingInfo,
 } from '@/types/common';
 
 import { LocalboxMyElement } from '../localbox';
-import { DeviceRatio } from '../signages';
 import { DisplayGpsSettingType } from './villages';
 
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
@@ -93,7 +93,7 @@ export interface PostingContent {
 
 /** @DTO 사이니지 콘텐츠 데이터 */
 export interface ContentSignageDto {
-  ratioType: DeviceRatio;
+  ratioType: NullableDeviceRatio;
   titleDto: {
     text: string;
     fontSize: string;

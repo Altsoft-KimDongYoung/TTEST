@@ -1,11 +1,11 @@
 import type {
-  CommonResponse,
   FontType,
   HorizontalAlignType,
   Pagenation,
   PagingInfo,
   VerticalAlignType,
 } from '@/types/common';
+import { DeviceRatio } from '@/types/common';
 
 import { GroupPlayStatus } from './signage';
 
@@ -157,9 +157,6 @@ export interface ProjectDetailContents extends ProjectCanRegisterContent {
   displayOrder: number;
   displayTime: number;
 }
-
-/** @SIGNAGE 사이니지의 비율 */
-type DeviceRatio = 'HOR_16_9' | 'VER_9_16';
 
 /** @TYPE ProjectCanRegisterContent 타입을 클라이언트 데이터로 변환할때 사용돠는 타입 */
 export interface ProjectCanRegisterContentState
