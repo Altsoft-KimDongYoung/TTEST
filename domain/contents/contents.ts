@@ -24,7 +24,7 @@ export type ContentTempDisplayDeviceType = 'MOBILE' | 'SIGNAGE' | 'MIXED';
 export const COMPLAIN_TYPE = [
   {
     label: '이미지, 사진, 콘텐츠 도용',
-    value: 'STEAL_CONTENTS',
+    value: 'STEAL_CONTENT',
   },
   {
     label: '사행성 광고',
@@ -125,7 +125,7 @@ export interface ContentListDto {
   contentLikeYn: boolean;
   contentNotLikeYn: boolean;
   contentBookmarkYn: boolean;
-  contentType: string;
+  contentType: ContentsType;
   contentTitle: string;
   contentBodyText: string;
   contentRepresentFileType: string;
@@ -159,13 +159,13 @@ export interface ContentDetailDto {
   contentRepresentFileType: string;
   contentRepresentFileUrl: string;
   contentDisplayRateDong?: string;
-  contentHashTagElementDtos: ContentHashTag[];
+  contentHashTagElementDtos?: ContentHashTag[];
   regDt: string;
   localboxElementDto: LocalboxMyElement;
   postingContentDto?: PostingContent;
   contentSignageDto?: ContentSignageDetailDto;
   shareOrganizationIds?: number[];
-  displayInfo: DisplayInfoDto;
+  displayInfo?: DisplayInfoDto;
 }
 
 /** @DTO 댓글 */
