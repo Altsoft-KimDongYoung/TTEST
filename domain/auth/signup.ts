@@ -13,6 +13,7 @@ export interface SignupCommonForm {
 export interface SignupMemberForm extends SignupCommonForm {
   townPointLongiX: string;
   townPointLatiY: string;
+  email?: string;
 }
 
 /** @AUTH 기업회원 폼 */
