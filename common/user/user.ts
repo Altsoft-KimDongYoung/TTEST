@@ -15,13 +15,13 @@ export type LocalboxCreatorType = ValueOf<typeof LOCALBOX_CREATOR_TYPE>;
 export type UserRoles = ValueOf<typeof USER_ROLES>;
 
 export interface UserModel {
-  userId: number;
-  loginId: string;
-  accessToken: string;
-  refreshToken: string;
-  localboxCreatorType: LocalboxCreatorType;
-  localboxId: number;
-  roles: UserRoles[];
-  myTownLatiY: number;
-  myTownLongiX: number;
+  userId?: number;
+  loginId?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  localboxCreatorType?: LocalboxCreatorType;
+  localboxId?: number;
+  roles?: UserRoles[];
+  myTownLatiY?: number;
+  myTownLongiX?: number;
 }

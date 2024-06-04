@@ -11,6 +11,13 @@ export interface FileInfo {
   url: string;
 }
 
+/** @MY 마이페이지  */
+export interface MyPage {
+  localboxProfileImgUrl?: string;
+  loginId: string;
+  nickname: string;
+}
+
 /** @MY 마이프로필 - 회원 공통 폼 */
 export interface CommonProfileForm {
   loginId: string;
