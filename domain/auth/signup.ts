@@ -40,6 +40,7 @@ export interface SignupApartmentForm extends SignupCommonForm {
   contactNumber: string;
   ownerName: string;
   organizationName: string;
+  homepageUrl?: string;
   employmentFile: File | null;
 }
 
@@ -64,9 +65,10 @@ export interface SignupLocalNewspaperForm extends SignupCommonForm {
   ownerName: string;
   businessContactNumber: string;
   newspaperName: string;
-  newspaperNumber: string;
+  newspaperRegNumber: string;
   baseAddr: string;
   detailAddr: string;
   licenseImg: File | null;
   employmentFile: File | null;
+  homepageUrl?: string;
 }
