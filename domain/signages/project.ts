@@ -72,13 +72,13 @@ export interface ContentListCanRegisterResponse extends PagingInfo {
 
 /** @DTO 프로젝트 정보 */
 export interface Project {
-  projectId: number;
-  projectName: string;
-  ratioType: DeviceRatio;
-  totalDisplayTime: number;
-  reservationCount: number;
-  isDefaultProject: boolean;
-  contentCount: number;
+  projectId?: number;
+  projectName?: string;
+  ratioType?: DeviceRatio;
+  totalDisplayTime?: number;
+  reservationCount?: number;
+  isDefaultProject?: boolean;
+  contentCount?: number;
 }
 
 /** @DTO 사이니지 프로젝트에 등록할 수 있는 컨텐츠 */
@@ -185,6 +185,13 @@ export interface ProjectEditForm {
 
 /** @TYPE 프로젝트 예약시에 Form 타입 */
 export interface ReserveRegisterForm {
+  projectId: number;
+  reserveStartDt: string;
+  reserveEndDt: string;
+}
+
+/** @TYPE 프로젝트 예약시에 Form 타입 */
+export interface ReserveEditForm {
   projectId: number;
   reserveStartDt: string;
   reserveEndDt: string;
