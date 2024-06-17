@@ -8,6 +8,14 @@ export interface RegisterReserveRequestBody {
   reserveEndDt: string;
 }
 
+/** @RequestBody 사이니지 프로젝트 복사에 사용되는 바디 */
+export interface ProjectCopyRequestBody {
+  groupId: number;
+  signageProjectRegDto: SignageProjectRegDto;
+  reserveStartDt: string;
+  reserveEndDt: string;
+}
+
 /** @RequestParams 사이니지 프로젝트 예약 목록 데이터를 가져오는데 사용되는 파라미터 */
 export interface ReservationDateListParams {
   groupId: number;
@@ -74,6 +82,19 @@ export interface ReservatedProject {
   signageGroupFirstPaymentDt?: string;
   signageGroupNextPaymentDt?: string;
   sigangeGroupPaymentCancellationDt?: string;
+}
+
+/** @DTO 복사할 사이니지 컨텐츠 */
+interface SignageProjectContentRegDto {
+  contentId: number;
+  displayTime: number;
+}
+
+/** @DTO 복사할 사이니지 프로젝트 */
+interface SignageProjectRegDto {
+  projectName: string;
+  ratioType: string;
+  signageProjectContentRegDtos: SignageProjectContentRegDto[];
 }
 
 /** @DTO 예약된 사이니지 프로젝트에 속한 컨텐츠 정보 */

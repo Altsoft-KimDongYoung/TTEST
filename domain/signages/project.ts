@@ -190,9 +190,18 @@ export interface ReserveRegisterForm {
   reserveEndDt: string;
 }
 
-/** @TYPE 프로젝트 예약시에 Form 타입 */
+/** @TYPE 프로젝트 예약 수정시에 Form 타입 */
 export interface ReserveEditForm {
   projectId: number;
+  reserveStartDt: string;
+  reserveEndDt: string;
+}
+
+/** @TYPE 프로젝트 복사시에 Form 타입 */
+export interface ProjectCopyForm {
+  projectName: string;
+  contentId: (number | undefined)[];
+  displayTime: number;
   reserveStartDt: string;
   reserveEndDt: string;
 }
