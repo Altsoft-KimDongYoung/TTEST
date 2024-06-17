@@ -3,4 +3,5 @@ export interface MyMenuItem {
   title: string;
   description: string;
   link?: string;
+  onClick?: (e: React.MouseEvent) => void;
 }
