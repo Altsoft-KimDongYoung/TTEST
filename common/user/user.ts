@@ -24,4 +24,7 @@ export interface UserModel {
   roles?: UserRoles[];
   myTownLatiY?: number;
   myTownLongiX?: number;
+  currentTownName?: string;
+  currentLongiX?: number;
+  currentLatiY?: number;
 }
