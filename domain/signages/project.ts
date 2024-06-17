@@ -12,6 +12,7 @@ import { GroupPlayStatus } from './signage';
 /** @RequestParams 사이니지 프로젝트 목록 데이터를 가져오는 API에 사용되는 파라미터 */
 export interface ProjectListParams extends Pagenation {
   ratioType?: DeviceRatio;
+  sort?: ProjectListFilterStatus;
 }
 
 /** @RequestParams 사이니지 프로젝트에 등록할 수 있는 컨텐츠의 목록을 가져오는 API에 사용되는 파라미터 */
@@ -157,6 +158,9 @@ export interface ProjectDetailContents extends ProjectCanRegisterContent {
   displayOrder: number;
   displayTime: number;
 }
+
+/** @TYPE 프로젝트 목록 검색 조회를 위해 사용되는 타입  */
+export type ProjectListFilterStatus = 'updateDt,DESC' | 'projectName,ASC';
 
 /** @TYPE ProjectCanRegisterContent 타입을 클라이언트 데이터로 변환할때 사용돠는 타입 */
 export interface ProjectCanRegisterContentState
