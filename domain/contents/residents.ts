@@ -5,7 +5,7 @@ export type Residents = 'residents';
 /** @CONTENT 주민소식(메인 콘텐츠) 기본 폼 형태  */
 export const MOBILE_INIT_FORM = {
   id: 0,
-  displayDeviceType: 'MOBILE',
+  displayDeviceType: '',
   title: '',
   body: '',
   bodyText: '',
@@ -17,7 +17,8 @@ export const MOBILE_INIT_FORM = {
 
 /** @CONTENT 주민소식(사이니지 콘텐츠) 기본 폼 형태  */
 export const SIGNAGE_INIT_FORM = {
-  displayDeviceType: 'SIGNAGE',
+  id: 0,
+  displayDeviceType: '',
   ratioType: '',
   title: '',
   titleFontSize: '',
@@ -35,7 +36,8 @@ export const SIGNAGE_INIT_FORM = {
 
 /** @CONTENT 주민소식(메인+사이니지 콘텐츠) 기본 폼 형태  */
 export const MIXED_INIT_FORM = {
-  displayDeviceType: 'MIXED',
+  id: 0,
+  displayDeviceType: '',
   ratioType: '',
   title: '',
   titleFontSize: '',
