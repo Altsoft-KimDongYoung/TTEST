@@ -58,6 +58,12 @@ export type ComplainType =
   | 'SWEAR_WORD'
   | string;
 
+export type ContentReasonType =
+  | 'COMPLAINED_CONTENT'
+  | 'CURRENT_PLAYING_SIGNAGE_CONTENT'
+  | 'POSTED_CONTENT'
+  | 'NONE';
+
 /** @DTO 해시태그 데이터 */
 export interface ContentHashTag {
   contentHashTagId: number;
@@ -149,8 +155,8 @@ export interface ContentDetailDto {
   contentLikeCount: number;
   contentNotLikeCount: number;
   contentReplyCount: number;
-  contentLikeYn: boolean;
-  contentNotLikeYn: boolean;
+  contentLikeYn?: boolean;
+  contentNotLikeYn?: boolean;
   contentBookmarkYn: boolean;
   contentType: string;
   displayDeviceType?: ContentTempDisplayDeviceType;
@@ -216,6 +222,12 @@ export interface Banner {
   createDt: string;
   updateDt: string;
   bannerFileUrl: string;
+}
+
+/** @DTO 수정&삭제 가능 DTO */
+export interface CanDto {
+  can: boolean;
+  reasonType: ContentReasonType;
 }
 
 /** @RequestParams 콘텐츠 조회 */
@@ -310,4 +322,10 @@ export interface ContentCountResponse extends CommonResponse {
 /** @Response 콘텐츠 개수 조회 응답 값 */
 export interface ContentCountResponse extends CommonResponse {
   result: number;
+}
+
+/** @Response 콘텐츠 수정&삭제 가능 여부 조회 응답 값 */
+export interface ContentUpdateableAndDeletableResponse {
+  updatableInfoDto: CanDto;
+  deletableInfoDto: CanDto;
 }

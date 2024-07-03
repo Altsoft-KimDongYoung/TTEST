@@ -60,3 +60,14 @@ export interface VillageNewsPutResponse {
   id: number;
   updateType: string;
 }
+
+/** @Response 콘텐츠 지역성 신고 가능 여부 */
+export interface ComplainCanContentLocalityResponse {
+  can: boolean;
+}
+
+/** @Request 콘텐츠 지역성 신고 */
+export interface ComplainContentLocalityBody {
+  contentId: number;
+  explanation?: string;
+}
