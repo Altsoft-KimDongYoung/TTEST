@@ -159,7 +159,7 @@ export interface ContentDetailDto {
   contentNotLikeYn?: boolean;
   contentBookmarkYn: boolean;
   contentType: string;
-  displayDeviceType?: ContentTempDisplayDeviceType;
+  displayDeviceType: ContentTempDisplayDeviceType;
   contentTitle: string;
   contentBody: string;
   contentRepresentFileType: string;
@@ -172,6 +172,7 @@ export interface ContentDetailDto {
   contentSignageDto?: ContentSignageDetailDto;
   shareOrganizationIds?: number[];
   displayInfo?: DisplayInfoDto;
+  displayYn: boolean;
 }
 
 /** @DTO 댓글 */
