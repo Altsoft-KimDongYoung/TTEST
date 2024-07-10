@@ -2,10 +2,6 @@ import { CommonResponse } from '@/types/common';
 
 import { ContentsType } from '../contents';
 
-// Request
-
-// Response
-
 export interface LocalboxMyResponse {
   message: string;
   result: LocalboxMy;
