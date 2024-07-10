@@ -232,12 +232,10 @@ export interface CanDto {
 }
 
 /** @RequestParams 콘텐츠 조회 */
-export interface contentListParams {
+export interface ContentListParams extends Pagenation {
   displayLongitude?: number;
   displayLatitude?: number;
   findKeyword?: string;
-  page?: number;
-  size?: number;
 }
 
 /** @RequestBody 배너 아이디 */
