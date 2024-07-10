@@ -323,6 +323,12 @@ export interface ContentCountResponse extends CommonResponse {
   result: number;
 }
 
+/** @TYPE 이미지 정보 */
+export interface ImageInfo {
+  imageUrl: string;
+  ratio: number;
+}
+
 /** @Response 콘텐츠 수정&삭제 가능 여부 조회 응답 값 */
 export interface ContentUpdateableAndDeletableResponse {
   updatableInfoDto: CanDto;
