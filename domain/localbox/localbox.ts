@@ -6,12 +6,11 @@ import {
   PagingInfo,
 } from '@/types/common';
 
-import { ContentDisplayDeviceType, ContentsType } from '../contents';
-
-export interface LocalboxMyResponse {
-  message: string;
-  result: LocalboxMy;
-}
+import {
+  ContentDisplayDeviceType,
+  ContentsType,
+  InsertBannerType,
+} from '../contents';
 
 // DTO
 export interface ContentCardType {
@@ -24,20 +23,6 @@ export interface ContentCardType {
   contentsType: ContentsType;
   badge?: ContentCardBadgeKey;
   button?: ContentCardButtonKey;
-}
-
-export interface LocalboxMy {
-  localboxId: number;
-  localboxName: string;
-  localboxProfileImgUrl: string;
-  localboxSummaryDisplayYn: boolean;
-  localboxSummary: string;
-  localboxWorkplaceAddrDisplayYn: boolean;
-  localboxWorkplaceAddr: string;
-  localboxWorkplaceContactNumberDisplayYn: boolean;
-  localboxWorkplaceBusinessHoursDisplayYn: boolean;
-  localboxMyTownName: string;
-  localboxWorkplaceBusinessHours: boolean;
 }
 
 // DataType
@@ -88,6 +73,9 @@ export interface LocalboxMyElement {
   localboxSubscribeYn: boolean;
 }
 // -------------------------------------------------------------
+/** @COMMON 로컬박스 콘텐츠 타입 */
+export type LocalboxContentType = 'ALL' | ContentsType;
+
 /** @ResponseBody 로컬박스 상세조회 */
 export interface LocalboxDetailResponse {
   localboxId: number;
@@ -117,14 +105,16 @@ export interface LocalboxContentResponse extends PagingInfo {
   content: LocalboxContentDTO[];
 }
 
-/**
- *  @RequestParams
- *  - 타 로컬박스 콘텐츠 목록 조회
- *  - 내 로컬박스 콘텐츠 목록 조회
- * */
-export interface LocalboxContentParams {
+/** @RequestParams 타 로컬박스 콘텐츠 목록 조회 */
+export interface LocalboxOtherContentParams {
   localboxId: number;
   contentType: ContentsType | null;
+}
+
+/** @RequestParams 내 로컬박스 콘텐츠 목록 조회 */
+export interface LocalboxMyContentParams {
+  contentType?: ContentsType | InsertBannerType | null;
+  contentDisplayDeviceTypes?: string;
 }
 
 /** @DTO 로컬박스 상단고정 콘텐츠 */
@@ -153,5 +143,28 @@ export interface LocalboxContentDTO {
   updateDt: string;
 }
 
-/** @COMMON 로컬박스 콘텐츠 타입 */
-export type LocalboxContentType = 'ALL' | ContentsType;
+/** @RequestParams 내 로컬박스 기본 정보 수정 */
+export interface LocalboxInfoParams {
+  nickname: string;
+  localboxWorkplaceContactNumberDisplayYn: boolean;
+  localboxWorkplaceAddrDisplayYn: boolean;
+  localboxWorkplaceBusinessHoursDisplayYn: boolean;
+  localboxWorkplaceBusinessHours: string;
+  localboxSummaryDisplayYn: boolean;
+  localboxSummary: string;
+  profileImg: string;
+}
+
+/** @ResponseBody 내 로컬박스 기본 정보 조회 */
+export interface LocalboxInfoResponse {
+  localboxId: number;
+  nickname: string;
+  localboxProfileImgUrl: string;
+  localboxSummaryDisplayYn: boolean;
+  localboxSummary: string;
+  localboxWorkplaceAddrDisplayYn: boolean;
+  localboxWorkplaceAddr: string;
+  localboxWorkplaceContactNumberDisplayYn: boolean;
+  localboxWorkplaceBusinessHoursDisplayYn: boolean;
+  localboxWorkplaceBusinessHours: string;
+}
