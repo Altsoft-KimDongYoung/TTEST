@@ -18,3 +18,10 @@ export interface AreaPointMyTownResponse {
   areaFullName: string;
   multiPolygonStr: string;
 }
+
+/** @COMMON 행정동별 콘텐츠 백분율 */
+export interface AdministrativeDistrictPercentage {
+  areaName: string;
+  areaFullName: string;
+  percentage: number;
+}

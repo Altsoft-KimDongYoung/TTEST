@@ -71,3 +71,23 @@ export interface PagingInfo {
 /** @TYPE 사이니지 기기 비율 타입 */
 export type DeviceRatio = 'HOR_16_9' | 'VER_9_16';
 export type NullableDeviceRatio = DeviceRatio | null;
+
+// -------------------------------------------------------------
+/** common -> Content로 뺴고 싶은 부분 */
+export type ContentBadge =
+  | 'VILLAGE_NEWS'
+  | 'RESIDENT_NEWS'
+  | 'AD'
+  | 'APPROVE_REJECT'
+  | 'APPROVE_IN_PROGRESS'
+  | 'LOCALITY_COMPLAIN'
+  | 'COMPLAIN_DELETE';
+
+export type ContentButton =
+  | 'AD_POST'
+  | 'AD_POST_CANCEL'
+  | 'RESIDENT_NEWS_POST'
+  | 'RESIDENT_NEWS_POST_CANCEL'
+  | 'REJECTION_REASON_CHECK';
+
+export type ContentRepresentFile = 'IMG_FILE' | 'MOV_FILE' | 'PDF_FILE';

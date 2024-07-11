@@ -1,6 +1,12 @@
-import { CommonResponse } from '@/types/common';
+import {
+  CommonResponse,
+  ContentButton,
+  ContentRepresentFile,
+  LocalboxCreatorType,
+  PagingInfo,
+} from '@/types/common';
 
-import { ContentsType } from '../contents';
+import { ContentDisplayDeviceType, ContentsType } from '../contents';
 
 export interface LocalboxMyResponse {
   message: string;
@@ -81,3 +87,71 @@ export interface LocalboxMyElement {
   localboxMyTownName: string;
   localboxSubscribeYn: boolean;
 }
+// -------------------------------------------------------------
+/** @ResponseBody 로컬박스 상세조회 */
+export interface LocalboxDetailResponse {
+  localboxId: number;
+  localboxCreatorType: LocalboxCreatorType;
+  organizationId: number;
+  nickname: string;
+  localboxProfileImgUrl: string;
+  localboxBadgeName: string;
+  localboxMyTownName: string;
+  localboxSubscribeYn: boolean;
+  villageNewsSumCount: number;
+  residentNewsSumCount: number;
+  adSumCount: number;
+  localboxSubscriptionSumCount: number;
+  localboxSummary?: string;
+  localboxWorkplaceAddr?: string;
+  localboxWorkplaceContactNumber?: string;
+  localboxWorkplaceBusinessHours?: string;
+}
+
+/**
+ * @ResponseBody
+ * - 내 로컬박스 콘텐츠 목록 조회
+ * - 타 로컬박스 콘텐츠 목록 조회
+ * */
+export interface LocalboxContentResponse extends PagingInfo {
+  content: LocalboxContentDTO[];
+}
+
+/**
+ *  @RequestParams
+ *  - 타 로컬박스 콘텐츠 목록 조회
+ *  - 내 로컬박스 콘텐츠 목록 조회
+ * */
+export interface LocalboxContentParams {
+  localboxId: number;
+  contentType: ContentsType | null;
+}
+
+/** @DTO 로컬박스 상단고정 콘텐츠 */
+export type LocalboxTopPinnedContentDTO = Pick<
+  LocalboxContentDTO,
+  | 'contentId'
+  | 'contentTitle'
+  | 'contentRepresentFileType'
+  | 'contentRepresentFileUrl'
+  | 'contentType'
+>;
+
+/** @DTO 로컬박스 콘텐츠 */
+export interface LocalboxContentDTO {
+  contentId: number;
+  contentType: ContentsType;
+  contentBadgeType: ContentButton;
+  contentTopGroupYn: boolean;
+  contentTitle: string;
+  contentRepresentFileType: ContentRepresentFile;
+  contentRepresentFileUrl: string;
+  mainDisplayCount: number;
+  signageDisplayCount: number;
+  contentDisplayDeviceType: ContentDisplayDeviceType;
+  createDt: string;
+  updateDt: string;
+}
+
+/** @COMMON 로컬박스 콘텐츠 타입 */
+export type LocalboxContentType = 'ALL' | ContentsType;
