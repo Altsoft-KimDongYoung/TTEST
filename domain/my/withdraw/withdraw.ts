@@ -6,3 +6,9 @@ export interface WithdrawalBody {
   withdrawalReason: keyof typeof WITHDRAWAL_REASONS;
   withdrawalOtherReason: string;
 }
+
+/** @Response 회원탈퇴  */
+export interface WithdrawalResponse {
+  withdrawalStatus: 'SUCCESS' | 'SCHEDULED' | 'NEVER_ATTEMPTED';
+  lastServiceEndDt?: string;
+}
