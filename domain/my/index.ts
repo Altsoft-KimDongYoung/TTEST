@@ -3,5 +3,6 @@ export * from './settings/settings';
 export * from './qr/qr';
 export * from './my';
 export * from './withdraw/withdraw';
+export * from './payment/payment';
 export * from './contentbox/contentbox';
 export * from './villages-settings/villagesSettings';
