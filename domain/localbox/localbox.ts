@@ -9,11 +9,11 @@ export interface LocalboxMyResponse {
 
 // DTO
 export interface ContentCardType {
-  isTopFixed: boolean;
+  isTopFixed?: boolean;
   id: number;
   thumbnail: string;
-  displaySignageCount: number;
-  displayMainCount: number;
+  displaySignageCount?: number;
+  displayMainCount?: number;
   preview: string;
   contentsType: ContentsType;
   badge?: ContentCardBadgeKey;
