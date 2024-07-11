@@ -3,6 +3,7 @@ import {
   ContentButton,
   ContentRepresentFile,
   LocalboxCreatorType,
+  Pagenation,
   PagingInfo,
 } from '@/types/common';
 
@@ -72,6 +73,7 @@ export interface LocalboxMyElement {
   localboxMyTownName: string;
   localboxSubscribeYn: boolean;
 }
+
 // -------------------------------------------------------------
 /** @COMMON 로컬박스 콘텐츠 타입 */
 export type LocalboxContentType = 'ALL' | ContentsType;
@@ -167,4 +169,18 @@ export interface LocalboxInfoResponse {
   localboxWorkplaceContactNumberDisplayYn: boolean;
   localboxWorkplaceBusinessHoursDisplayYn: boolean;
   localboxWorkplaceBusinessHours: string;
+}
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+/** @RequestParams 로컬박스에서 콘텐츠 목록 조회 시 보내야 하는 params */
+export interface LocalboxContentParams extends Pagenation {
+  contentType: ContentsType | InsertBannerType | null;
+  contentDisplayDeviceTypes: string;
+}
+
+/** @RequestBody 콘텐츠 포스팅 신청을 위해 보내야하는 값 */
+export interface ContentPostingBody {
+  contentId: number;
+  postingContentId: number;
+  requestDisplayPeriod: string;
 }
