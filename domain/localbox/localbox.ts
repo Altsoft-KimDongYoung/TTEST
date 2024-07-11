@@ -1,5 +1,6 @@
 import {
   CommonResponse,
+  ContentBadge,
   ContentButton,
   ContentRepresentFile,
   LocalboxCreatorType,
@@ -13,7 +14,6 @@ import {
   InsertBannerType,
 } from '../contents';
 
-// DTO
 export interface ContentCardType {
   isTopFixed?: boolean;
   id: number;
@@ -22,8 +22,8 @@ export interface ContentCardType {
   displayMainCount?: number;
   preview: string;
   contentsType: ContentsType;
-  badge?: ContentCardBadgeKey;
-  button?: ContentCardButtonKey;
+  badge?: ContentBadge;
+  button?: ContentButton;
 }
 
 // DataType
@@ -74,7 +74,6 @@ export interface LocalboxMyElement {
   localboxSubscribeYn: boolean;
 }
 
-// -------------------------------------------------------------
 /** @COMMON 로컬박스 콘텐츠 타입 */
 export type LocalboxContentType = 'ALL' | ContentsType;
 
@@ -119,6 +118,25 @@ export interface LocalboxMyContentParams {
   contentDisplayDeviceTypes?: string;
 }
 
+/** @RequestParams 내 로컬박스 기본 정보 수정 */
+export interface LocalboxInfoParams {
+  nickname: string;
+  localboxWorkplaceContactNumberDisplayYn: boolean;
+  localboxWorkplaceAddrDisplayYn: boolean;
+  localboxWorkplaceBusinessHoursDisplayYn: boolean;
+  localboxWorkplaceBusinessHours: string;
+  localboxSummaryDisplayYn: boolean;
+  localboxSummary: string;
+  profileImg: string;
+}
+
+/** @RequestParams 로컬박스에서 콘텐츠 목록 조회 시 보내야 하는 params */
+export interface LocalboxContentParams extends Pagenation {
+  contentType: ContentsType | InsertBannerType | null;
+  contentDisplayDeviceTypes: string;
+}
+
+// DTO
 /** @DTO 로컬박스 상단고정 콘텐츠 */
 export type LocalboxTopPinnedContentDTO = Pick<
   LocalboxContentDTO,
@@ -133,7 +151,8 @@ export type LocalboxTopPinnedContentDTO = Pick<
 export interface LocalboxContentDTO {
   contentId: number;
   contentType: ContentsType;
-  contentBadgeType: ContentButton;
+  contentBadgeType: ContentBadge;
+  contentButtonType: ContentButton;
   contentTopGroupYn: boolean;
   contentTitle: string;
   contentRepresentFileType: ContentRepresentFile;
@@ -143,18 +162,6 @@ export interface LocalboxContentDTO {
   contentDisplayDeviceType: ContentDisplayDeviceType;
   createDt: string;
   updateDt: string;
-}
-
-/** @RequestParams 내 로컬박스 기본 정보 수정 */
-export interface LocalboxInfoParams {
-  nickname: string;
-  localboxWorkplaceContactNumberDisplayYn: boolean;
-  localboxWorkplaceAddrDisplayYn: boolean;
-  localboxWorkplaceBusinessHoursDisplayYn: boolean;
-  localboxWorkplaceBusinessHours: string;
-  localboxSummaryDisplayYn: boolean;
-  localboxSummary: string;
-  profileImg: string;
 }
 
 /** @ResponseBody 내 로컬박스 기본 정보 조회 */
@@ -169,13 +176,6 @@ export interface LocalboxInfoResponse {
   localboxWorkplaceContactNumberDisplayYn: boolean;
   localboxWorkplaceBusinessHoursDisplayYn: boolean;
   localboxWorkplaceBusinessHours: string;
-}
-
-// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-/** @RequestParams 로컬박스에서 콘텐츠 목록 조회 시 보내야 하는 params */
-export interface LocalboxContentParams extends Pagenation {
-  contentType: ContentsType | InsertBannerType | null;
-  contentDisplayDeviceTypes: string;
 }
 
 /** @RequestBody 콘텐츠 포스팅 신청을 위해 보내야하는 값 */
