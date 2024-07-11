@@ -70,6 +70,13 @@ export interface ContentListCanRegisterResponse extends PagingInfo {
   content: ProjectCanRegisterContent[];
 }
 
+/** @Response fetchIsUniqueContent 응답 */
+export interface IsUniqueContentResponse {
+  uniqueContentHaveYn: boolean;
+  signageProjectName?: string;
+  signageProjectCount?: number;
+}
+
 /** @DTO 프로젝트 정보 */
 export interface Project {
   projectId?: number;

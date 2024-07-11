@@ -62,6 +62,8 @@ export type ContentReasonType =
   | 'COMPLAINED_CONTENT'
   | 'CURRENT_PLAYING_SIGNAGE_CONTENT'
   | 'POSTED_CONTENT'
+  | 'LOCALITY_COMPLAINED_CONTENT'
+  | 'DEFAULT_SIGNAGE_PROJECT'
   | 'NONE';
 
 /** @DTO 해시태그 데이터 */
@@ -172,7 +174,12 @@ export interface ContentDetailDto {
   contentSignageDto?: ContentSignageDetailDto;
   shareOrganizationIds?: number[];
   displayInfo?: DisplayInfoDto;
+  isLocalityComplained: boolean;
+  isComplained: boolean;
+  complainType?: ComplainType;
+  complainReason?: string;
   displayYn: boolean;
+  isPinnedToTopGroup: boolean;
 }
 
 /** @DTO 댓글 */
@@ -243,7 +250,7 @@ export interface BannerBody {
   id: number;
 }
 
-/** @RequestBody 좋아요,싫어요,구독,북마크 */
+/** @RequestBody 좋아요, 싫어요, 구독, 북마크, 노출설정 및 해제 */
 export interface SetYnBody {
   contentId: number;
   setYn: boolean;

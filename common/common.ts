@@ -72,8 +72,6 @@ export interface PagingInfo {
 export type DeviceRatio = 'HOR_16_9' | 'VER_9_16';
 export type NullableDeviceRatio = DeviceRatio | null;
 
-// -------------------------------------------------------------
-/** common -> Content로 뺴고 싶은 부분 */
 export type ContentBadge =
   | 'VILLAGE_NEWS'
   | 'RESIDENT_NEWS'
