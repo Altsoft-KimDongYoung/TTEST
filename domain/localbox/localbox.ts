@@ -94,14 +94,14 @@ export interface LocalboxContentResponse extends PagingInfo {
 }
 
 /** @RequestParams 타 로컬박스 콘텐츠 목록 조회 */
-export interface LocalboxOtherContentParams {
+export interface LocalboxOtherContentParams extends Pagenation {
   localboxId: number;
   contentType: ContentsType | null;
 }
 
 /** @RequestParams 내 로컬박스 콘텐츠 목록 조회 */
-export interface LocalboxMyContentParams {
-  contentType?: ContentsType | InsertBannerType | null;
+export interface LocalboxMyContentParams extends Pagenation {
+  contentType?: ContentsType | null;
   contentDisplayDeviceTypes?: string;
 }
 
