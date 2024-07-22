@@ -8,11 +8,16 @@ export interface ChildOrganizationDto {
   organizationDepth: number;
   organizationName: string;
   organizationBaseAddr: string;
+  organizationDetailAddr: string;
   organizationAddrPointX: number;
   organizationAddrPointY: number;
   organizationAddrAreaName: string;
   organizationAddrAreaFullName: string;
-  organizationDetailAddr: string;
   createDt: string;
   updateDt: string;
+}
+
+/**@Response 주민소식 등록 시 담당기관의 산하 기관 조회 response */
+export interface ChildOrganizationResponse extends ChildOrganizationDto {
+  childOrganizationDtos?: ChildOrganizationDto[];
 }
