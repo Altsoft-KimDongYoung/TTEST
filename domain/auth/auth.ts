@@ -103,3 +103,21 @@ export interface ParentHierarchy {
   createDt: string;
   updateDt: string;
 }
+
+/** @RequestParams 사업자 유효성 체크 (기업, 지역신문사 회원 가입시 입력한 사업장의 유효성 체크) */
+export interface CheckBusinessParams {
+  businessName: string;
+  ownerName: string;
+  businessNumber: string;
+  openDt: string;
+}
+
+/** @ResponseBody 사업자 유효성 체크 (기업, 지역신문사 회원 가입시 입력한 사업장의 유효성 체크) */
+export interface CheckBusinessResponse {
+  businessName: string;
+  ownerName: string;
+  businessNumber: string;
+  openDt: string;
+  status: string;
+  statusMsg: string;
+}
