@@ -334,6 +334,7 @@ export interface ContentCountResponse extends CommonResponse {
 export interface ImageInfo {
   imageUrl: string;
   ratio: number;
+  difference: number;
 }
 
 /** @Response 콘텐츠 수정&삭제 가능 여부 조회 응답 값 */
