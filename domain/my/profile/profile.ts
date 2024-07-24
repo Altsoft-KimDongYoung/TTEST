@@ -126,6 +126,7 @@ export interface ApartmentMemberProfileDTO extends CommonProfileDTO {
   organizationName: string;
   email: string;
   ownerName: string;
+  homepageUrl?: string;
 }
 
 /** @DTO 마이프로필 상세 조회 (관공서 회원 DTO) */
