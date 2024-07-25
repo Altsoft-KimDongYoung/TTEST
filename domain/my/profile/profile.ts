@@ -33,7 +33,10 @@ export interface CommonProfileForm {
 }
 
 /** @MY 마이프로필 - 일반 회원 폼 */
-export interface MemberProfileForm extends CommonProfileForm {}
+export interface MemberProfileForm extends CommonProfileForm {
+  newEmail?: string;
+  currentEmail?: string;
+}
 
 /** @MY 마이프로필 - 기업 회원 폼 */
 export interface BusinessMemberProfileForm extends CommonProfileForm {
@@ -104,7 +107,9 @@ export interface CommonProfileDTO {
 }
 
 /** @DTO 마이프로필 상세 조회 (일반 회원 DTO) */
-export interface MemberProfileDTO extends CommonProfileDTO {}
+export interface MemberProfileDTO extends CommonProfileDTO {
+  email?: string;
+}
 
 /** @DTO 마이프로필 상세 조회 (기업 회원 DTO) */
 export interface BusinessMemberProfileDTO extends CommonProfileDTO {
