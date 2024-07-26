@@ -1,7 +1,11 @@
 export interface MyMenuItem {
   icon: React.ReactNode;
+  actionIcon?: React.ReactNode;
   title: string;
   description: string;
-  link?: string;
   onClick?: (e: React.MouseEvent) => void;
+}
+
+export interface MyMenuActionItem extends MyMenuItem {
+  link: string;
 }
