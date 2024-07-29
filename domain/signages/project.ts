@@ -83,9 +83,10 @@ export interface Project {
   projectName?: string;
   ratioType?: DeviceRatio;
   totalDisplayTime?: number;
-  reservationCount?: number;
+  playCount?: number;
   isDefaultProject?: boolean;
   contentCount?: number;
+  isPlay?: boolean;
 }
 
 /** @DTO 사이니지 프로젝트에 등록할 수 있는 컨텐츠 */
