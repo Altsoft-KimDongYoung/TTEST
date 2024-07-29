@@ -121,3 +121,13 @@ export interface CheckBusinessResponse {
   status: string;
   statusMsg: string;
 }
+
+/** @RequestParams 특정 기관 관리자 존재 여부 체크 (특정 기관 관리자(회원)가 이미 존재하는 지를 확인하는 API) */
+export interface CheckOrganizationManagerParams {
+  organizationId: string;
+}
+
+/** @ResponseBody 특정 기관 관리자 존재 여부 체크 (특정 기관 관리자(회원)가 이미 존재하는 지를 확인하는 API) */
+export interface CheckOrganizationManagerResponse {
+  exist: boolean;
+}
