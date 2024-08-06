@@ -318,6 +318,7 @@ export interface ContentTempResponse extends PagingInfo {
 /** @Response 콘텐츠 댓글 조회 응답 */
 export interface ContentCommentResponse extends PagingInfo {
   content: Comment[];
+  totalElements: number;
 }
 
 /** @Response 콘텐츠 개수 조회 응답 값 */
