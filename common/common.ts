@@ -90,3 +90,5 @@ export type ContentButton =
   | 'REJECTION_REASON_CHECK';
 
 export type ContentRepresentFile = 'IMG_FILE' | 'MOV_FILE' | 'PDF_FILE';
+
+export type NotificationType = 'global' | 'notification' | 'notice';
