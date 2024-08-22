@@ -10,7 +10,10 @@ export type NaverMap = naver.maps.Map;
 export type NaverCircle = naver.maps.Circle;
 export type NaverPolygon = naver.maps.Polygon;
 export type NaverMarker = naver.maps.Marker;
-
+export type MapOptions = naver.maps.MapOptions;
+export type CircleOptions = naver.maps.CircleOptions;
+export type PolygonOptions = naver.maps.PolygonOptions;
+export type MarkerOptions = naver.maps.MarkerOptions;
 /*
  * Latitude: 위도 (y 좌표)
  * Longitude: 경도 (x 좌표)
@@ -41,4 +44,29 @@ export interface MapInstanceRefs {
 export interface RangeSlide {
   range: ContentExposedArea;
   value: number[];
+}
+
+export interface DrawMapProps {
+  position: Coordinate;
+  mapOptions?: MapOptions;
+  mapId?: string;
+}
+
+export interface DrawCircleProps {
+  map: NaverMap;
+  position: Coordinate;
+  radius?: CircleRadius;
+  circleOptions?: CircleOptions;
+}
+
+export interface DrawPolygonProps {
+  map: NaverMap;
+  multiPolygon: MultiPolygon;
+  polygonOptions?: PolygonOptions;
+}
+
+export interface DrawMarkerProps {
+  map: NaverMap;
+  position: Coordinate;
+  markerOptions?: MarkerOptions;
 }
