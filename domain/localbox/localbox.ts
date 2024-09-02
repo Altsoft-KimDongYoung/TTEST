@@ -8,11 +8,7 @@ import {
   PagingInfo,
 } from '@/types/common';
 
-import {
-  ContentDisplayDeviceType,
-  ContentsType,
-  InsertBannerType,
-} from '../contents';
+import { ContentDisplayDeviceType, ContentsType, InsertBannerType } from '../contents';
 
 export interface ContentCardType {
   isTopFixed?: boolean;

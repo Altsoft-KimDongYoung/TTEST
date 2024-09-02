@@ -38,7 +38,7 @@ export interface NewsCommonResponse<
     | NotificationContentDTO[]
     | NoticeContentDTO[]
     | BookmarkContentDTO[]
-    | SubscriptionContentDTO[]
+    | SubscriptionContentDTO[],
 > extends PagingInfo {
   content: T;
 }

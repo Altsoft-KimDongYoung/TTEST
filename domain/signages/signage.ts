@@ -353,10 +353,7 @@ export type RenderTypeGroupPage =
  * WRONG_IMG_UPLOAD(1, "잘못된 사진이 업로드 되어있어요."),
  * NOT_INSTALLED_SIGNAGE_GROUP(2, "사이니지 그룹으로 설치가 안되어있어요.")
  */
-export type GroupApplyRejectType =
-  | 'ET_CETERA'
-  | 'WRONG_IMG_UPLOAD'
-  | 'NOT_INSTALLED_SIGNAGE_GROUP';
+export type GroupApplyRejectType = 'ET_CETERA' | 'WRONG_IMG_UPLOAD' | 'NOT_INSTALLED_SIGNAGE_GROUP';
 
 /**
  * @TYPE 사이니지 그룹의 결제 상태 타입
@@ -364,10 +361,7 @@ export type GroupApplyRejectType =
  * PAYMENT_STATUS(1, "결제 상태"),
  * PAYMENT_END_WAITING_STATUS(2, "결제 종료 대기 상태")
  */
-export type PaymentStatus =
-  | 'UNPAID_STATUS'
-  | 'PAYMENT_STATUS'
-  | 'PAYMENT_END_WAITING_STATUS';
+export type PaymentStatus = 'UNPAID_STATUS' | 'PAYMENT_STATUS' | 'PAYMENT_END_WAITING_STATUS';
 
 /**
  * @TYPE 사이니지 그룹 전원 상태 타입

@@ -171,8 +171,7 @@ export interface ProjectDetailContents extends ProjectCanRegisterContent {
 export type ProjectListFilterStatus = 'updateDt,DESC' | 'projectName,ASC';
 
 /** @TYPE ProjectCanRegisterContent 타입을 클라이언트 데이터로 변환할때 사용돠는 타입 */
-export interface ProjectCanRegisterContentState
-  extends ProjectCanRegisterContent {
+export interface ProjectCanRegisterContentState extends ProjectCanRegisterContent {
   count: number;
 }
 

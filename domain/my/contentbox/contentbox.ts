@@ -38,7 +38,4 @@ export type LocalityComplainStatus =
   | 'CONTENT_REJECT_REQ_TO_CANCEL'
   | 'CONTENT_BLIND_CANCELED';
 
-export type ComplainStatus =
-  | 'COMPLAIN_ACCEPT'
-  | 'CONTENT_CLEAR'
-  | 'CONTENT_BLIND';
+export type ComplainStatus = 'COMPLAIN_ACCEPT' | 'CONTENT_CLEAR' | 'CONTENT_BLIND';

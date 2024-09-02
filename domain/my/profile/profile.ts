@@ -92,7 +92,7 @@ export type FetchMyProfileResponse<
     | BusinessMemberProfileDTO
     | ApartmentMemberProfileDTO
     | GVMTMemberProfileDTO
-    | LocalNewspaperMemberProfileDTO
+    | LocalNewspaperMemberProfileDTO,
 > = T;
 
 /** @DTO 마이프로필 상세 조회 (회원 공통 DTO) */

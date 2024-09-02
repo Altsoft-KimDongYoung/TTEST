@@ -29,8 +29,7 @@ export interface NotificationSettingsDTO {
 }
 
 /** @ResponseBody 내 알림 권한 설정 정보 조회  */
-export interface NotificationPermissionResponse
-  extends NotificationSettingsDTO {
+export interface NotificationPermissionResponse extends NotificationSettingsDTO {
   createDt: string;
   updateDt: string;
 }
