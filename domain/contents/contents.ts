@@ -11,7 +11,7 @@ import { DisplayGpsSettingType } from './villages';
 
 export type InsertBannerType = 'AD' | 'RESIDENT_NEWS';
 
-export type ContentsType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD';
+export type ContentsType = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD' | 'SHORT_FORM';
 
 export type ContentTextType = '동네소식' | '주민소식' | ' 광고';
 

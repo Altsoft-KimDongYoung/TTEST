@@ -73,21 +73,13 @@ export interface PagingInfo {
 export type DeviceRatio = 'HOR_16_9' | 'VER_9_16';
 export type NullableDeviceRatio = DeviceRatio | null;
 
-export type ContentBadge =
-  | 'VILLAGE_NEWS'
-  | 'RESIDENT_NEWS'
-  | 'AD'
-  | 'APPROVE_REJECT'
-  | 'APPROVE_IN_PROGRESS'
-  | 'LOCALITY_COMPLAIN'
-  | 'COMPLAIN_DELETE';
+export type ContentBadge = 'VILLAGE_NEWS' | 'RESIDENT_NEWS' | 'AD' | 'SHORT_FORM';
 
 export type ContentButton =
   | 'AD_POST'
   | 'AD_POST_CANCEL'
   | 'RESIDENT_NEWS_POST'
-  | 'RESIDENT_NEWS_POST_CANCEL'
-  | 'REJECTION_REASON_CHECK';
+  | 'RESIDENT_NEWS_POST_CANCEL';
 
 export type ContentRepresentFile = 'IMG_FILE' | 'MOV_FILE' | 'PDF_FILE';
 

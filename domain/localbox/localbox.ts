@@ -10,33 +10,13 @@ import {
 
 import { ContentDisplayDeviceType, ContentsType, InsertBannerType } from '../contents';
 
-export interface ContentCardType {
-  isTopFixed?: boolean;
-  id: number;
-  thumbnail: string;
-  displaySignageCount?: number;
-  displayMainCount?: number;
-  preview: string;
-  contentsType: ContentsType;
-  badge?: ContentBadge;
-  button?: ContentButton;
-}
-
-// DataType
-
-export type ContentCardBadgeValue =
-  | '주민소식'
-  | '광고'
-  | '심사중'
-  | '우리동네 소식이 아니에요'
-  | '반려';
+export type ContentCardBadgeValue = '주민소식' | '광고';
 
 export type ContentCardButtonValue =
   | '광고 삽입가능'
   | '광고 해제'
   | '주민소식 삽입가능'
-  | '주민소식 해제'
-  | '반려사유 확인';
+  | '주민소식 해제';
 
 export interface VisitTown {
   visitTownId: number;
