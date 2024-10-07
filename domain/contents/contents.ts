@@ -66,6 +66,8 @@ export type ContentReasonType =
   | 'DEFAULT_SIGNAGE_PROJECT'
   | 'NONE';
 
+export type DetailType = 'CONTENT' | 'COMMENT';
+
 /** @DTO 해시태그 데이터 */
 export interface ContentHashTag {
   contentHashTagId: number;
@@ -266,6 +268,8 @@ export interface SubscribeBody {
 /** @RequestParams 콘텐츠 댓글 목록 조회 */
 export interface ContentReplyListParams extends Pagenation {
   contentId: number;
+  sort?: string;
+  path?: DetailType;
 }
 
 /** @RequestBody 콘텐츠 댓글 등록 */
