@@ -83,4 +83,4 @@ export type ContentButton =
 
 export type ContentRepresentFile = 'IMG_FILE' | 'MOV_FILE' | 'PDF_FILE';
 
-export type NotificationType = 'global' | 'notification' | 'notice';
+export type NotificationType = 'global' | 'notification' | 'notice' | 'localbox';
