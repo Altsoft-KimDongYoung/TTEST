@@ -97,6 +97,7 @@ export interface PostingContent {
   contentId: number;
   contentType: InsertBannerType;
   contentTitle: string;
+  contentBodyText: string;
   contentRepresentFileType: string;
   contentRepresentFileUrl: string;
   mainDisplayCount: number;
