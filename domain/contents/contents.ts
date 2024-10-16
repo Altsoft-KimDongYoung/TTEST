@@ -68,6 +68,8 @@ export type ContentReasonType =
 
 export type DetailType = 'CONTENT' | 'COMMENT';
 
+export type ContentRatioType = 'HORIZONTAL' | 'VERTICAL';
+
 /** @DTO 해시태그 데이터 */
 export interface ContentHashTag {
   contentHashTagId: number;
