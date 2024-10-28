@@ -45,6 +45,10 @@ export interface RangeSlide {
   range: ContentExposedArea;
   value: number[];
 }
+export interface RadiusOption {
+  label: ContentExposedArea;
+  value: number;
+}
 
 export interface DrawMapProps {
   position: Coordinate;
