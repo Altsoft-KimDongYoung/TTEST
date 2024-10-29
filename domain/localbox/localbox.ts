@@ -47,17 +47,23 @@ export interface LocalboxDetailResponse {
   organizationId: number;
   nickname: string;
   localboxProfileImgUrl: string;
-  localboxBadgeName: string;
+  localboxBadgeName: string /** ❌ 제거 예정 */;
   localboxMyTownName: string;
-  localboxSubscribeYn: boolean;
+  localboxSubscribeYn: boolean /** ❌ 제거 예정 */;
   villageNewsSumCount: number;
   residentNewsSumCount: number;
   adSumCount: number;
-  localboxSubscriptionSumCount: number;
+  shortFormSumCount: number;
+  followingCount: number;
+  followerCount: number;
+  localboxFollowedByMeYn: boolean;
+  localboxFollowingMeYn: boolean;
+  localboxSubscriptionSumCount: number /** ❌ 제거 예정 */;
   localboxSummary?: string;
-  localboxWorkplaceAddr?: string;
-  localboxWorkplaceContactNumber?: string;
-  localboxWorkplaceBusinessHours?: string;
+  localboxWorkplaceAddr?: string /** ❌ 제거 예정 */;
+  localboxWorkplaceContactNumber?: string /** ❌ 제거 예정 */;
+  localboxWorkplaceBusinessHours?: string /** ❌ 제거 예정 */;
+  membershipStatus: 'PROVISIONAL' | 'REGULAR';
 }
 
 /**

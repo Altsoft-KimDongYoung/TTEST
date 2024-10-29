@@ -261,7 +261,7 @@ export interface SetYnBody {
   setYn: boolean;
 }
 
-// 🔥 로컬박스로 옮겨야 하나?
+/** ❌ 제거 예정 */
 /** @RequestBody 로컬박스 구독 */
 export interface SubscribeBody {
   targetLocalboxId: number;
@@ -349,4 +349,10 @@ export interface ImageInfo {
 export interface ContentUpdateableAndDeletableResponse {
   updatableInfoDto: CanDto;
   deletableInfoDto: CanDto;
+}
+
+/** @RequestBody 로컬박스 팔로우 */
+export interface LocalboxFollowBody {
+  targetLocalboxId: number;
+  followYn: boolean;
 }
