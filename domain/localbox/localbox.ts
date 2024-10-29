@@ -38,7 +38,7 @@ export interface LocalboxMyElement {
 }
 
 /** @COMMON 로컬박스 콘텐츠 타입 */
-export type LocalboxContentType = 'ALL' | ContentsType;
+export type LocalboxContentType = 'ALL' | 'INFO' | ContentsType;
 
 /** @ResponseBody 로컬박스 상세조회 */
 export interface LocalboxDetailResponse {
