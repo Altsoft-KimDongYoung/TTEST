@@ -21,6 +21,8 @@ export type ContentDisplayDeviceType = 'NONE' | 'MOBILE' | 'SIGNAGE' | 'MIXED';
 
 export type ContentTempDisplayDeviceType = 'MOBILE' | 'SIGNAGE' | 'MIXED';
 
+export type ResizeMode = 'cover' | 'contain' | 'none';
+
 export const COMPLAIN_TYPE = [
   {
     label: '이미지, 사진, 콘텐츠 도용',
@@ -147,6 +149,7 @@ export interface ContentListDto {
   contentHashTagElementDtos: ContentHashTag[];
   regDt: string;
   localboxElementDto: LocalboxMyElement;
+  viewerData: string[];
 }
 
 /** @DTO 콘텐츠 노출영역 */
