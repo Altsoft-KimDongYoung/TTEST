@@ -73,4 +73,6 @@ export interface DrawMarkerProps {
   map: NaverMap;
   position: Coordinate;
   markerOptions?: MarkerOptions;
+  image?: 'localbox' | 'currentPosition';
+  size?: number;
 }

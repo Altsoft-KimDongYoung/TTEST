@@ -69,6 +69,10 @@ export interface PagingInfo {
   empty: boolean;
 }
 
+/** @TYPE 바텀시트 */
+export type HeaderType = 'default' | 'close' | 'temporaryStorage' | 'backspace';
+export type HeightType = 'default' | 'full';
+
 /** @TYPE 사이니지 기기 비율 타입 */
 export type DeviceRatio = 'HOR_16_9' | 'VER_9_16';
 export type NullableDeviceRatio = DeviceRatio | null;
