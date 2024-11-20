@@ -1,9 +1,4 @@
-import type { KeyLabel, Pageable, Sort, UserType, UserTypeLabel } from '@/types/common';
-
-/** @AUTH 회원유형 key, label, icon 정의한 타입 */
-export interface SelectUserTypeItem extends KeyLabel<UserType, UserTypeLabel> {
-  icon: React.ReactNode;
-}
+import type { Pageable, Sort } from '@/types/common';
 
 /** @RequestParams PinCode SMS, Email 전송 */
 export interface SendPinCodeParams {
