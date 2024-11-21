@@ -183,6 +183,7 @@ export interface ContentDetailDto {
   shareOrganizationIds?: number[];
   displayInfo?: DisplayInfoDto;
   isLocalityComplained: boolean;
+  isLocalityDoubleCompained: boolean;
   isComplained: boolean;
   complainType?: ComplainType;
   complainReason?: string;

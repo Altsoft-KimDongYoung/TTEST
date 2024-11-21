@@ -1,13 +1,12 @@
-import { Pagenation, PagingInfo } from '@/types/common';
+import { ContentBadge, Pagenation, PagingInfo } from '@/types/common';
 
-import { ContentDisplayDeviceType, ContentsType } from '../../contents';
+import { ContentsType } from '../../contents';
 
-/** @RequestParams 승인된 사이니지 기기를 삭제하기 위한 파라미터 */
+/** @RequestParams 콘텐츠 보관함 목록 요청을 위한 파라미터 */
 export interface ContentBoxListParams extends Pagenation {
   anyComplainYn?: boolean;
   findKeyword?: string;
-  contentType: ContentsType;
-  contentDisplayDeviceType: ContentDisplayDeviceType;
+  contentType: ContentsType | null;
 }
 
 export interface ContentBoxListResponse extends PagingInfo {
@@ -20,6 +19,8 @@ export interface ContentBoxItemDto {
   contentTitle: string;
   contentRepresentFileType: 'IMG_FILE' | 'MOV_FILE' | 'PDF_FILE';
   contentRepresentFileUrl: string;
+  contentType: ContentsType;
+  contentBadgeType: ContentBadge;
   complainYn: boolean;
   localityComplainYn: boolean;
   complainStatus: ComplainStatus;
