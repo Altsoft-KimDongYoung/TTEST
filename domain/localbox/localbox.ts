@@ -92,7 +92,6 @@ export interface LocalboxDetailResponse {
   villageNewsSumCount: number;
   residentNewsSumCount: number;
   adSumCount: number;
-  shortFormSumCount: number;
   followingCount: number;
   followerCount: number;
   localboxFollowedByMeYn: boolean;
