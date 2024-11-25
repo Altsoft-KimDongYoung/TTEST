@@ -1,4 +1,5 @@
 import {
+  AdministrativeDistrictPercentage,
   CommonResponse,
   LocalboxCreatorType,
   NullableDeviceRatio,
@@ -99,7 +100,6 @@ export interface PostingContent {
   contentId: number;
   contentType: InsertBannerType;
   contentTitle: string;
-  contentBodyText: string;
   contentRepresentFileType: string;
   contentRepresentFileUrl: string;
   mainDisplayCount: number;
@@ -189,6 +189,7 @@ export interface ContentDetailDto {
   complainReason?: string;
   displayYn: boolean;
   isPinnedToTopGroup: boolean;
+  contentLocalityDtos?: AdministrativeDistrictPercentage[]; // 🔥 추가예정
 }
 
 /** @DTO 댓글 */
@@ -296,6 +297,13 @@ export interface ComplainContentReplyBody {
   contentReplyId: number;
   complainType: ComplainType;
   explanation: string;
+}
+
+/** @RequestParams 콘텐츠 댓글 수정 */
+export interface ContentReplyEditBody {
+  contentId: number;
+  contentReplyId: number;
+  repl: string;
 }
 
 /** @RequestBody 콘텐츠 신고 */
