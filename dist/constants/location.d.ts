@@ -1,1 +1,0 @@
-export declare const INITIAL_AREA_FULL_NAME = "\uC11C\uC6B8\uD2B9\uBCC4\uC2DC \uAC15\uB0A8\uAD6C \uC0BC\uC131\uB3D9";
