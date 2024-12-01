@@ -1,3 +1,5 @@
+/// <reference types="@types/navermaps" />
+
 /*
  * @types/navermaps 에서 제공하는 타입들을 다시 재정의
  * NaverMap: 지도 주체
