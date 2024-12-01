@@ -1,0 +1,20 @@
+export declare const REG_EXP: {
+    readonly NUMBER: RegExp;
+    readonly PHONE_NUMBER: RegExp;
+    readonly NAME: RegExp;
+    readonly NICKNAME: RegExp;
+    readonly ID: RegExp;
+    readonly PASSWORD: RegExp;
+    readonly BUSINESS_NUMBER: RegExp;
+    readonly CONTACT_NUMBER: RegExp;
+    readonly DATE: RegExp;
+    readonly EMAIL: RegExp;
+    readonly HTML_TEXT: RegExp;
+    readonly MULTIPLE_NEWLINES: RegExp;
+    readonly NUMBER_OR_ALPHABET: RegExp;
+    readonly HOMEPAGE_URL: RegExp;
+    readonly SPECIAL_CHAR_HASHTAG: RegExp;
+    readonly IMAGE_TAG: RegExp;
+    readonly IMAGE_FILE: RegExp;
+    readonly VIDEO_FILE: RegExp;
+};
